@@ -80,7 +80,6 @@ if ('development' == app.get('env')) {
 
 //replace template values with environment variables.
 app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
-	var appName = 'APP_NAME';
 	var actKey = 'KEY';
 	var actName = 'ACTIVITY_NAME';
 	var actDesc = 'ACTIVITY_DESCRIPTION';
@@ -90,13 +89,13 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     var caImg40 = 'CA_IMG_40';
     var caImg15 = 'CA_IMG_15';     
     var endPointSearch = new RegExp('{{'+endpointName+'}}', 'g'); 
-	var search = new RegExp('{{'+appName+'}}', 'g');
+
 	var json = JSON.parse(JSON.stringify(configjson)); //clone it.
 	json.arguments.execute.url = configjson.arguments.execute.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.save.url = configjson.configurationArguments.save.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.publish.url = configjson.configurationArguments.publish.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.validate.url = configjson.configurationArguments.validate.url.replace(endPointSearch,process.env[endpointName]);
-	json.edit.url = configjson.edit.url.replace(search,process.env[appName]);
+	json.edit.url = configjson.edit.url.replace(endPointSearch,process.env[endpointName]);
 	search = new RegExp('{{'+actKey+'}}', 'g');
 	json.configurationArguments.applicationExtensionKey = configjson.configurationArguments.applicationExtensionKey.replace(search,process.env[actKey]);
 	search = new RegExp('{{'+actName+'}}', 'g');
