@@ -1,0 +1,45 @@
+{
+   "workflowApiVersion": "1.0",
+   "metaData": {
+       "icon": "{{CA_IMG_40}}",
+       "iconSmall": "{{CA_IMG_15}}",
+       "category": "message",
+	   "isConfigured":true
+   },
+   "type": "REST",
+   "lang": {
+       "en-US": {
+           "name": "{{ACTIVITY_NAME}}",
+           "description": "{{ACTIVITY_DESCRIPTION}}"
+       }
+   },
+   "arguments": {
+        "execute": {
+            "inArguments": [],               
+            "url": "https://{{ENDPOINT_NAME}}.herokuapp.com/saveGenericConfig",
+            "verb": "POST",
+            "body": "",
+            "header": "",
+            "format": "json",
+            "useJwt": false,
+            "timeout": 10000
+       }
+   },
+   "configurationArguments": {
+       "applicationExtensionKey": "{{KEY}}",
+       "save": {
+           "url": "https://{{ENDPOINT_NAME}}.herokuapp.com/save"
+       },
+       "publish": {
+           "url": "https://{{ENDPOINT_NAME}}.herokuapp.com/publish"
+       },
+       "validate": {
+           "url": "https://{{ENDPOINT_NAME}}.herokuapp.com/validate"
+       }
+   },
+   "edit": {
+		"url": "https://{{APP_NAME}}.herokuapp.com/edit",
+		"height": "{{EDIT_HEIGHT}}",
+		"width": "{{EDIT_WIDTH}}"
+	}
+}

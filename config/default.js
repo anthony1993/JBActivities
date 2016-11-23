@@ -1,0 +1,3 @@
+module.exports = {
+   appSignature    : 'lwdiwdvd3irzfdbbt05wq01qwfvfnbu25o3lqraflvpvv2vttbs0stozf30vbz04s0ah3zxnnwd52non1ecc55umd4lj32hpana1pvpz3a0y2klnce0vfuure4zetomcxdzdcxbzbkl5pdaxf5ruu2ikiyqgvgfwanp0znsizdlgezgz14xsstqvfvmm24jhatdw0anypdglbtegwkdrqpx15hjhrns4guogexcjrycl120wabwhtu05dpboolq'
+};
