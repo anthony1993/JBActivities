@@ -89,7 +89,7 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     var caImg40 = 'CA_IMG_40';
     var caImg15 = 'CA_IMG_15';     
     var endPointSearch = new RegExp('{{'+endpointName+'}}', 'g'); 
-
+    var search;
 	var json = JSON.parse(JSON.stringify(configjson)); //clone it.
 	json.arguments.execute.url = configjson.arguments.execute.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.save.url = configjson.configurationArguments.save.url.replace(endPointSearch,process.env[endpointName]);
