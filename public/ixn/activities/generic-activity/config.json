@@ -38,7 +38,7 @@
        }
    },
    "edit": {
-		"url": "https://{{APP_NAME}}.herokuapp.com/edit",
+		"url": "https://{{ENDPOINT_NAME}}.herokuapp.com/edit",
 		"height": "{{EDIT_HEIGHT}}",
 		"width": "{{EDIT_WIDTH}}"
 	}

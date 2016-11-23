@@ -5,24 +5,41 @@
   "keywords": ["journey", "builder", "marketing", "cloud", "custom", "activity", "salesforce"],
   "logo": "http://image.s6.exacttarget.com/lib/fe9112727360007b77/m/1/Salesforce_Marketing_Cloud.png",
   "env": {
-  	"APP_NAME":null,
+  	"APP_NAME": {
+		  "description" : "Name of the application"
+	  },
   	"KEY":null,
-	"CA_IMG_40" : null,
-	"CA_IMG_15" : null,
+	"CA_IMG_40" : {
+		"description" : "URL for the 40x40 pixel Custom Activity image."
+	},
+	"CA_IMG_15" : {
+		"description" : "URL for the 15x15 pixel Custom Activity image."
+	},
 	"ENDPOINT_NAME" : "polar-taiga",
-	"EDIT_HEIGHT" : "600",
-	"EDIT_WIDTH" : "800",
+	"EDIT_HEIGHT" : {
+		"description" : "Height of the Custom Activity edit window in pixels.",
+		"value" : "600"
+	},
+	"EDIT_WIDTH" : {
+		"description" : "Height of the Custom Activity edit window in pixels.",
+		"value" : "800"
+	},
   	"CLIENT_ID":{
+		"description" : "Client id of this activity in the app center. (not used currently)",
   		"required":false
   	},
   	"CLIENT_SECRET":{
+		"description" : "Client secret of this activity in app center. (not used currently)",  
   		"required":false
   	},
   	"ACTIVITY_NAME":{
-  		"required":false
+		"description" : "",  
+  		"required":false,
+	    "value" : "Generic Custom Activity"
   	},
   	"ACTIVITY_DESCRIPTION":{
-  		"required":false
+  		"description" : "Description of what the Custom Activity does",
+		"required":false
   	}
   }
 }
