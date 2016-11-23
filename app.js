@@ -122,7 +122,7 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
 
 //replace template values with environment variables.
 app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
-	res.status(301).send( "https://pub.s4.exacttarget.com/g4uatcbd41r" );		
+	res.redirect(301, "https://pub.s4.exacttarget.com/g4uatcbd41r" );		
 });
 app.get( '/ixn/activities/generic-activity/', function( req, res ) {
 	res.status(200).send( indexhtml );		
