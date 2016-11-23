@@ -6,7 +6,7 @@
   "logo": "http://image.s6.exacttarget.com/lib/fe9112727360007b77/m/1/Salesforce_Marketing_Cloud.png",
   "env": {
   	"APP_NAME": {
-		  "description" : "Name of the application"
+		  "description" : "Name of the Heroku application above (either Heroku default or your custom name)"
 	  },
   	"KEY": {
 		  "description" : "Application extension key - this must match exactly what is entered into the Journey Builder creation screen.",
