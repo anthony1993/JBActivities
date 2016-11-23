@@ -99,12 +99,8 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     var endpointName = 'ENDPOINT_NAME';
     var editHeight = 'EDIT_HEIGHT';
     var editWidth = 'EDIT_WIDTH';
-
-    var caImg40 = 'CA_IMG_40';
-    var caImg15 = 'CA_IMG_15';  
-
     var endPointSearch = new RegExp('{{'+endpointName+'}}', 'g'); 
-    var search = new RegExp('{{' + appName +'}}');
+    var search = new RegExp('{{'+appName+'}}', 'g');
 	var json = JSON.parse(JSON.stringify(configjson)); //clone it.
 	json.arguments.execute.url = configjson.arguments.execute.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.save.url = configjson.configurationArguments.save.url.replace(endPointSearch,process.env[endpointName]);
@@ -120,11 +116,7 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     search = new RegExp('{{'+editHeight+'}}', 'g');
 	json.edit.height = convertNumberToInteger(configjson.edit.height.replace(search,process.env[editHeight]));    
     search = new RegExp('{{'+editWidth+'}}', 'g');	
-	json.edit.width = convertNumberToInteger(configjson.edit.width.replace(search,process.env[editWidth]));
-    // search = new RegExp('{{' + caImg40 + '}}', 'g');
-    // json.metaData.icon = configjson.metaData.icon.replace(search,process.env[caImg40]);
-    // search = new RegExp('{{' + caImg15 + '}}', 'g');
-    // json.metaData.iconSmall = configjson.metaData.iconSmall.replace(search,process.env[caImg15]);    
+	json.edit.width = convertNumberToInteger(configjson.edit.width.replace(search,process.env[editWidth]));  
     res.status(200).send( json );
 });
 
