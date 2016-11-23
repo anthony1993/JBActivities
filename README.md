@@ -1,5 +1,5 @@
 # Journey Builder Custom Activities
-## Contains Master, Call Center Branch, and Direct Mail branch
+## Contains a generic activity
 
 **NOTE:** Deploy individual branches via multiple Heroku apps.
 
