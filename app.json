@@ -10,8 +10,8 @@
 	"CA_IMG_40" : null,
 	"CA_IMG_15" : null,
 	"ENDPOINT_NAME" : "polar-taiga",
-	"EDIT_HEIGHT" : 600,
-	"EDIT_WIDTH" : 800,
+	"EDIT_HEIGHT" : "600",
+	"EDIT_WIDTH" : "800",
   	"CLIENT_ID":{
   		"required":false
   	},
