@@ -78,24 +78,39 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+app.get('/ixn/activities/generic-activity/images/icon.png', function (req, res) {
+    var caImg40 = 'CA_IMG_40';
+    var imgLoc = process.env[caImg40];
+    res.redirect(301, imgLoc);
+});
+
+app.get('/ixn/activities/generic-activity/images/iconSmall.png', function (req, res) {
+    var caImg40 = 'CA_IMG_15';
+    var imgLoc = process.env[caImg15];
+    res.redirect(301, imgLoc);
+});
+
 //replace template values with environment variables.
 app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
 	var actKey = 'KEY';
+    var appName = 'APP_NAME';
 	var actName = 'ACTIVITY_NAME';
 	var actDesc = 'ACTIVITY_DESCRIPTION';
     var endpointName = 'ENDPOINT_NAME';
     var editHeight = 'EDIT_HEIGHT';
     var editWidth = 'EDIT_WIDTH';
+
     var caImg40 = 'CA_IMG_40';
-    var caImg15 = 'CA_IMG_15';     
+    var caImg15 = 'CA_IMG_15';  
+
     var endPointSearch = new RegExp('{{'+endpointName+'}}', 'g'); 
-    var search;
+    var search = new RegExp('{{' + appName +'}}');
 	var json = JSON.parse(JSON.stringify(configjson)); //clone it.
 	json.arguments.execute.url = configjson.arguments.execute.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.save.url = configjson.configurationArguments.save.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.publish.url = configjson.configurationArguments.publish.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.validate.url = configjson.configurationArguments.validate.url.replace(endPointSearch,process.env[endpointName]);
-	json.edit.url = configjson.edit.url.replace(endPointSearch,process.env[endpointName]);
+	json.edit.url = configjson.edit.url.replace(search,process.env[appName]);
 	search = new RegExp('{{'+actKey+'}}', 'g');
 	json.configurationArguments.applicationExtensionKey = configjson.configurationArguments.applicationExtensionKey.replace(search,process.env[actKey]);
 	search = new RegExp('{{'+actName+'}}', 'g');
@@ -104,14 +119,12 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
 	json.lang['en-US'].description = configjson.lang['en-US'].description.replace(search,process.env[actDesc]);
     search = new RegExp('{{'+editHeight+'}}', 'g');
 	json.edit.height = convertNumberToInteger(configjson.edit.height.replace(search,process.env[editHeight]));    
-    search = new RegExp('{{'+editWidth+'}}', 'g');
-    console.error("Width: " + configjson.editWidth);	
+    search = new RegExp('{{'+editWidth+'}}', 'g');	
 	json.edit.width = convertNumberToInteger(configjson.edit.width.replace(search,process.env[editWidth]));
-    console.error("Replace: " + json.edit.width);
-    search = new RegExp('{{' + caImg40 + '}}', 'g');
-    json.metaData.icon = configjson.metaData.icon.replace(search,process.env[caImg40]);
-    search = new RegExp('{{' + caImg15 + '}}', 'g');
-    json.metaData.iconSmall = configjson.metaData.iconSmall.replace(search,process.env[caImg15]);    
+    // search = new RegExp('{{' + caImg40 + '}}', 'g');
+    // json.metaData.icon = configjson.metaData.icon.replace(search,process.env[caImg40]);
+    // search = new RegExp('{{' + caImg15 + '}}', 'g');
+    // json.metaData.iconSmall = configjson.metaData.iconSmall.replace(search,process.env[caImg15]);    
     res.status(200).send( json );
 });
 
