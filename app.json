@@ -8,7 +8,10 @@
   	"APP_NAME": {
 		  "description" : "Name of the application"
 	  },
-  	"KEY":null,
+  	"KEY": {
+		  "description" : "Application extension key - this must match exactly what is entered into the Journey Builder creation screen.",
+		  "required" : "true"
+	  },
 	"CA_IMG_40" : {
 		"description" : "URL for the 40x40 pixel Custom Activity image."
 	},
