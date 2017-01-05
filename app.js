@@ -113,6 +113,8 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
 app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
     var caEditUrl = 'CA_EDIT_URL';
     var editCAUrl = process.env[caEditUrl];
+    
+    console.log("Redirecting to " + editCAUrl);
 
 	res.redirect(301, editCAUrl );		
 });
