@@ -11,18 +11,7 @@ var parseString = require('xml2js').parseString;
 var fs = require('fs');
 
 var configjson  = require('./public/ixn/activities/generic-activity/config.json');
-var indexhtml;
-fs.readFile('./public/ixn/activities/generic-activity/index.html', "utf-8", function(err, html) {
-    var configVars = ['ACTIVITY_NAME','ACTIVITY_DESCRIPTION','REQUEST_METHOD','REQUEST_URL','ENDPOINT_NAME','CA_IMG_40','CA_IMG_15','EDIT_HEIGHT','EDIT_WIDTH'];
-	if (!process.env.ACTIVITY_NAME) process.env.ACTIVITY_NAME = 'Generic Custom Activity';
-	if (!process.env.ACTIVITY_DESCRIPTION) process.env.ACTIVITY_DESCRIPTION = 'Generic description - can be configured via ACTIVITY_DESCRIPTION.';
-	for (var i=0;i<configVars.length;i++) {
-		var search = new RegExp('{{'+configVars[i]+'}}', 'g');
-		html = html.replace(search,process.env[configVars[i]]);
-	}
-	indexhtml = html;	
-});	
-	
+
 function convertNumberToInteger(val) {
     if (isNaN(val)) {
         return val;
@@ -120,7 +109,7 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     res.status(200).send( json );
 });
 
-//replace template values with environment variables.
+// redirect to a page outside of this custom activity
 app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
     var caEditUrl = 'CA_EDIT_URL';
     var editCAUrl = process.env[caEditUrl];
