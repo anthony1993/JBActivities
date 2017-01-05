@@ -114,7 +114,7 @@ app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
     var caEditUrl = 'CA_EDIT_URL';
     var editCAUrl = process.env[caEditUrl];
 
-	res.redirect(301, caEditUrl );		
+	res.redirect(301, editCAUrl );		
 });
 app.get( '/ixn/activities/generic-activity/', function( req, res ) {
 	res.status(200).send( indexhtml );		

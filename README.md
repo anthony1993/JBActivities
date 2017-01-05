@@ -14,6 +14,7 @@
 * CA_IMG_40 - 40px Custom Activity logo location (absolute URL required)
 * CA_IMG_15 - 15px Custom Activity logo location (absolute URL required)
 * ENDPOINT_NAME - polar-taiga
+* CA_EDIT_URL - https URL of the edit window page (template can be found in this github repo)
 * EDIT_HEIGHT - height of the Custom Activity config window 
 * EDIT_WIDTH - width of the Custom Activity config window
 
