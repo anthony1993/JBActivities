@@ -86,7 +86,7 @@ define( function( require ) {
         };
 
 		//TODO: Shouldn't this come from the data?
-        payload.flowDisplayName = 'Sirius XM';
+        payload.flowDisplayName = 'Custom Activity';
  
         connection.trigger('getPayload', payload);
     });

@@ -13,36 +13,32 @@
 		  "required" : "true"
 	  },
 	"CA_IMG_40" : {
-		"description" : "URL for the 40x40 pixel Custom Activity image."
+		"description" : "Full https URL for the 40x40 pixel Custom Activity image."
 	},
 	"CA_IMG_15" : {
-		"description" : "URL for the 15x15 pixel Custom Activity image."
+		"description" : "Full https URL for the 15x15 pixel Custom Activity image."
 	},
-	"ENDPOINT_NAME" : "polar-taiga",
-	"EDIT_HEIGHT" : {
-		"description" : "Height of the Custom Activity edit window in pixels.",
-		"value" : "600"
-	},
-	"EDIT_WIDTH" : {
-		"description" : "Height of the Custom Activity edit window in pixels.",
-		"value" : "800"
-	},
-  	"CLIENT_ID":{
-		"description" : "Client id of this activity in the app center. (not used currently)",
-  		"required":false
-  	},
-  	"CLIENT_SECRET":{
-		"description" : "Client secret of this activity in app center. (not used currently)",  
-  		"required":false
-  	},
   	"ACTIVITY_NAME":{
 		"description" : "",  
   		"required":false,
 	    "value" : "Generic Custom Activity"
   	},
   	"ACTIVITY_DESCRIPTION":{
-  		"description" : "Description of what the Custom Activity does",
+  		"description" : "Description of what the Custom Activity does (advanced)",
 		"required":false
-  	}
+  	},
+	"ENDPOINT_NAME" : "polar-taiga",
+	"CA_EDIT_URL" : {
+		"description" : "https URL of the edit window page (template can be found in this github repo)",
+		"required" : "true"
+	},
+	"EDIT_HEIGHT" : {
+		"description" : "Height of the Custom Activity edit window in pixels. (advanced)",
+		"value" : "600"
+	},
+	"EDIT_WIDTH" : {
+		"description" : "Height of the Custom Activity edit window in pixels. (advanced)",
+		"value" : "800"
+	}	  
   }
 }
