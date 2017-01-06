@@ -8,6 +8,11 @@ define( function( require ) {
 	var tokens;
 	var endpoints;
 	var inArgPayload = {};
+	var step = 1; 
+
+    // get the # of steps
+	var numSteps = process.env['CA_NUM_STEPS'];
+    console.log("Number of steps: " + numSteps);
 
     $(window).ready(function() {
         connection.trigger('ready');
@@ -43,8 +48,68 @@ define( function( require ) {
 
         }
         
-		$('#firstCall' ).show();
+		gotoStep(step);
 
+    });
+
+    function gotoStep(step) {
+        $('.step').hide();
+
+       // remove the case statement ... better handled by if statement
+	   // special cases ... first step and last step ..
+       if (step == 1) {
+    		$('#step1').show();
+			if (step == numSteps)
+			{
+                connection.trigger('updateButton', { button: 'back', visible: false });
+                connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
+			}
+			else {
+        		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
+        		connection.trigger('updateButton', { button: 'back', visible: false });
+			}
+	   }
+	   else if(step < numSteps) {		   
+			var stepStr = '#step' + step;
+		 	$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
+    		$(stepStr).show();
+    		connection.trigger('updateButton', { button: 'back', visible: true });
+			connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });			        
+	   }
+	   else if (step == numSteps) {
+
+	   } else {
+		   preparePayload();
+	   }
+
+        // switch(step) {
+        //     case 1:
+        //         $('#step1').show();
+        //         connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
+        //         connection.trigger('updateButton', { button: 'back', visible: false });
+        //         break;
+        //     case 2:
+        //         $('#step2').show();
+        //         $('#showMessage').html(getMessage());
+        //         connection.trigger('updateButton', { button: 'back', visible: true });
+        //         connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+        //         break;
+        //     case 3: // Only 2 steps, so the equivalent of 'done' - send off the payload
+        //         save();
+        //         break;
+        // }
+    };
+
+    connection.on('clickedNext', function() {
+        step++;
+        gotoStep(step);
+        connection.trigger('ready');
+    });
+
+    connection.on('clickedBack', function() {
+        step--;
+        gotoStep(step);
+        connection.trigger('ready');
     });
 
 	/**
@@ -98,19 +163,19 @@ define( function( require ) {
     connection.on('populateFields', function(payload) {
     });
 	
-	connection.on('clickedNext', function() {
+    // this is essentially DONE
+	// connection.on('clickedNext', function() {
 
-		preparePayload();
-        connection.trigger('updateActivity',inArgPayload);
-    });
+	// 	preparePayload();
+    //     connection.trigger('updateActivity',inArgPayload);
+    // });
 
 
     function preparePayload() {    
 
 		var value = getMessage();		
 
-console.log("inArgPayload: " + JSON.stringify(inArgPayload));
-
+        console.log("inArgPayload: " + JSON.stringify(inArgPayload));
 
 		inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
 		inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
