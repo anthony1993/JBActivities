@@ -70,13 +70,13 @@ if ('development' == app.get('env')) {
 app.get('/ixn/activities/generic-activity/images/icon.png', function (req, res) {
     var caImg40 = 'CA_IMG_40';
     var imgLoc = process.env[caImg40];
-    res.redirect(301, imgLoc);
+    res.redirect(302, imgLoc);
 });
 
 app.get('/ixn/activities/generic-activity/images/iconSmall.png', function (req, res) {
     var caImg40 = 'CA_IMG_15';
     var imgLoc = process.env[caImg15];
-    res.redirect(301, imgLoc);
+    res.redirect(302, imgLoc);
 });
 
 //replace template values with environment variables.
@@ -116,7 +116,7 @@ app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
     
     console.log("Redirecting to " + editCAUrl);
 
-	res.redirect(301, editCAUrl );		
+	res.redirect(302, editCAUrl );		
 });
 app.get( '/ixn/activities/generic-activity/', function( req, res ) {
 	res.status(200).send( indexhtml );		
