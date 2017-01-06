@@ -11,8 +11,9 @@ define( function( require ) {
 	var step = 1; 
 
     // get the # of steps
-	var numSteps = process.env['CA_NUM_STEPS'];
-    console.log("Number of steps: " + numSteps);
+	var numSteps = $.url().param('numSteps');
+	// do some error checking on the inbound num steps
+	console.log("numSteps " + numSteps);
 
     $(window).ready(function() {
         connection.trigger('ready');
