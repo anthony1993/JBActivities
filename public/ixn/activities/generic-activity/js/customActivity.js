@@ -191,7 +191,9 @@ define( function( require ) {
 		inArgPayload.metaData.isConfigured = true;
 	}
 
-	function getMessage () {		
-		return $('#messageInput').val().trim();	
+	function getMessage () {
+		return "";	
+		// 	
+		//return $('#messageInput').val().trim();	
 	}
 });
