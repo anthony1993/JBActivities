@@ -1,4 +1,9 @@
-
+function getUrlParameter(name) {
+    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    var results = regex.exec(location.search);
+    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+};
 
 define( function( require ) {
 	var Postmonger = require( 'postmonger' );
@@ -11,7 +16,7 @@ define( function( require ) {
 	var step = 1; 
 
     // get the # of steps
-	var numSteps = $.url().param('numSteps');
+	var numSteps = getUrlParameter('numSteps');
 	// do some error checking on the inbound num steps
 	console.log("numSteps " + numSteps);
 
