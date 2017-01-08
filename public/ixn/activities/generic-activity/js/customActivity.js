@@ -170,11 +170,11 @@ define( function( require ) {
     });
 	
     // this is essentially DONE
-	// connection.on('clickedNext', function() {
+	connection.on('clickedNext', function() {
 
-	// 	preparePayload();
-    //     connection.trigger('updateActivity',inArgPayload);
-    // });
+	 	preparePayload();
+        connection.trigger('updateActivity',inArgPayload);
+    });
 
 
     function preparePayload() {    
