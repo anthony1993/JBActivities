@@ -123,7 +123,7 @@ app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
 	res.redirect(302, editCAUrl );		
 });
 app.get( '/ixn/activities/generic-activity/', function( req, res ) {
-	res.status(200).send( indexhtml );		
+	res.status(200).send( index.html );		
 });
 
 http.createServer(app).listen(app.get('port'), function(){
