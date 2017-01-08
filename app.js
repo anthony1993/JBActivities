@@ -12,6 +12,8 @@ var fs = require('fs');
 
 var configjson  = require('./public/ixn/activities/generic-activity/config.json');
 
+var indexhtml = "Placeholder text for JB"
+
 function convertNumberToInteger(val) {
     if (isNaN(val)) {
         return val;
@@ -124,16 +126,7 @@ app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
 });
 
 app.get( '/ixn/activities/generic-activity/', function( req, res ) {
-    var caEditUrl = 'CA_EDIT_URL';
-    var editCAUrl = process.env[caEditUrl];
-    // add the number of steps to the query string ... not sensitive info
-    var numSteps = process.env['CA_NUM_STEPS'];
-    console.log("Number of steps: " + numSteps);
-    var editCAUrl = editCAUrl + '?numSteps=' + numSteps;
-
-    console.log("Redirecting to " + editCAUrl);
-
-	res.redirect(302, editCAUrl );	
+	res.status(200).send( indexhtml );		
 });
 
 http.createServer(app).listen(app.get('port'), function(){
