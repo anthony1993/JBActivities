@@ -12,7 +12,8 @@ var fs = require('fs');
 
 var configjson  = require('./public/ixn/activities/generic-activity/config.json');
 
-var indexhtml = "Placeholder text for JB"
+// JB wants to be able to hit an index.html page ... just use this text to satisfy that request
+var indexhtml = "Placeholder for JB";
 
 function convertNumberToInteger(val) {
     if (isNaN(val)) {
@@ -126,6 +127,7 @@ app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
 });
 
 app.get( '/ixn/activities/generic-activity/', function( req, res ) {
+    // pass back the placeholder text
 	res.status(200).send( indexhtml );		
 });
 

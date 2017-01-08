@@ -59,34 +59,34 @@ define( function( require ) {
     });
 
     function gotoStep(step) {
-        $('.step').hide();
+       // $('.step').hide();
 
        // remove the case statement ... better handled by if statement
 	   // special cases ... first step and last step ..
-       if (step == 1) {
-    		$('#step1').show();
-			if (step == numSteps)
-			{
-                connection.trigger('updateButton', { button: 'back', visible: false });
-                connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
-			}
-			else {
-        		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
-        		connection.trigger('updateButton', { button: 'back', visible: false });
-			}
-	   }
-	   else if(step < numSteps) {		   
-			var stepStr = '#step' + step;
-		 	$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
-    		$(stepStr).show();
-    		connection.trigger('updateButton', { button: 'back', visible: true });
-			connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });			        
-	   }
-	   else if (step == numSteps) {
+    //    if (step == 1) {
+    // 		$('#step1').show();
+	// 		if (step == numSteps)
+	// 		{
+    //             connection.trigger('updateButton', { button: 'back', visible: false });
+    //             connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
+	// 		}
+	// 		else {
+    //     		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
+    //     		connection.trigger('updateButton', { button: 'back', visible: false });
+	// 		}
+	//    }
+	//    else if(step < numSteps) {		   
+	// 		var stepStr = '#step' + step;
+	// 	 	$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
+    // 		$(stepStr).show();
+    // 		connection.trigger('updateButton', { button: 'back', visible: true });
+	// 		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });			        
+	//    }
+	//    else if (step == numSteps) {
 
-	   } else {
-		   preparePayload();
-	   }
+	//    } else {
+	// 	   preparePayload();
+	//    }
 
         // switch(step) {
         //     case 1:
@@ -192,8 +192,6 @@ define( function( require ) {
 	}
 
 	function getMessage () {
-		return "";	
-		// 	
-		//return $('#messageInput').val().trim();	
+		return $('#messageInput').val().trim();	
 	}
 });
