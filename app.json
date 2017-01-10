@@ -27,6 +27,11 @@
   		"description" : "Description of what the Custom Activity does (advanced)",
 		"required":false
   	},
+	"EXECUTE_ENDPOINT_NAME" : {
+		"description" : "",
+		"required" : "true",
+		"value" : "polar-taiga"
+	},
 	"ENDPOINT_NAME" : "polar-taiga",
 	"CA_EDIT_URL" : {
 		"description" : "https URL of the edit window page (template can be found in this github repo)",

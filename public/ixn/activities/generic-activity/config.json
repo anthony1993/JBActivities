@@ -16,7 +16,7 @@
    "arguments": {
         "execute": {
             "inArguments": [],               
-            "url": "https://{{ENDPOINT_NAME}}.herokuapp.com/saveGenericConfig",
+            "url": "https://{{EXECUTE_ENDPOINT_NAME}}.herokuapp.com/saveGenericConfig",
             "verb": "POST",
             "body": "",
             "header": "",
