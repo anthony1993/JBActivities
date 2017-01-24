@@ -38,7 +38,7 @@
        }
    },
    "edit": {
-		"url": "https://{{APP_NAME}}.herokuapp.com/ixn/activities/generic-activity/index.html",
+		"url": "https://{{HEROKU_APP_NAME}}.herokuapp.com/ixn/activities/generic-activity/index.html",
 		"height": "{{EDIT_HEIGHT}}",
 		"width": "{{EDIT_WIDTH}}"
 	}

@@ -7,7 +7,7 @@
 
 * ACTIVITY_DESCRIPTION - description of activity
 * ACTIVITY_NAME - name of activity that will be shown in JB
-* APP_NAME - name of heroku app
+* HEROKU_APP_NAME - name of heroku app
 * KEY - key of JB activity created in app center
 * CA_IMG_40 - 40px Custom Activity logo location (absolute URL required)
 * CA_IMG_15 - 15px Custom Activity logo location (absolute URL required)

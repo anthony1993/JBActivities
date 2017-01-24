@@ -85,7 +85,7 @@ app.get('/ixn/activities/generic-activity/images/iconSmall.png', function (req, 
 //replace template values with environment variables.
 app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
 	var actKey = 'KEY';
-    var appName = 'APP_NAME';
+    var appName = 'HEROKU_APP_NAME';
 	var actName = 'ACTIVITY_NAME';
 	var actDesc = 'ACTIVITY_DESCRIPTION';
     var endpointName = 'ENDPOINT_NAME';
