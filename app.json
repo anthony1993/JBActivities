@@ -24,7 +24,7 @@
 	    "value" : "Generic Custom Activity"
   	},
   	"ACTIVITY_DESCRIPTION":{
-  		"description" : "Description of what the Custom Activity does (advanced)",
+  		"description" : "Description of the Custom Activity purpose or usage.",
 		"required":false
   	},
 	"EXECUTE_ENDPOINT_URL" : {
@@ -32,7 +32,9 @@
 		"required" : "true",
 		"value" : "https://polar-taiga-52256.herokuapp.com/saveRequestConfig"
 	},
-	"ENDPOINT_NAME" : "polar-taiga-52256",
+  "ENDPOINT_NAME" : {
+	  "value" : "polar-taiga-52256",
+	  "description" : "Do not change this value - it handles the publish/save/validate calls for the Custom Activity."},
 	"CA_EDIT_URL" : {
 		"description" : "https URL of the edit window page (template can be found in this github repo)",
 		"required" : "true"
