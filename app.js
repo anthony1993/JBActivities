@@ -91,12 +91,12 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     var endpointName = 'ENDPOINT_NAME';
     var editHeight = 'EDIT_HEIGHT';
     var editWidth = 'EDIT_WIDTH';
-    var executeEndpointName = 'EXECUTE_ENDPOINT_NAME';
+    var executeEndpointURL = 'EXECUTE_ENDPOINT_URL';
     var endPointSearch = new RegExp('{{'+endpointName+'}}', 'g'); 
-    var executeEndPointSearch = new RegExp('{{'+executeEndpointName+'}}', 'g'); 
+    var executeEndPointSearch = new RegExp('{{'+executeEndpointURL+'}}', 'g'); 
     var search = new RegExp('{{'+appName+'}}', 'g');
 	var json = JSON.parse(JSON.stringify(configjson)); //clone it.
-	json.arguments.execute.url = configjson.arguments.execute.url.replace(executeEndPointSearch,process.env[executeEndpointName]);
+	json.arguments.execute.url = configjson.arguments.execute.url.replace(executeEndPointSearch,process.env[executeEndpointURL]);
 	json.configurationArguments.save.url = configjson.configurationArguments.save.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.publish.url = configjson.configurationArguments.publish.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.validate.url = configjson.configurationArguments.validate.url.replace(endPointSearch,process.env[endpointName]);

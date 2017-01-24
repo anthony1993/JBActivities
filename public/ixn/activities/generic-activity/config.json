@@ -16,7 +16,7 @@
    "arguments": {
         "execute": {
             "inArguments": [],               
-            "url": "{{EXECUTE_ENDPOINT_NAME}}",
+            "url": "{{EXECUTE_ENDPOINT_URL}}",
             "verb": "POST",
             "body": "",
             "header": "",
