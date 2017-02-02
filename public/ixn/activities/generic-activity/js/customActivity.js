@@ -88,22 +88,23 @@ define( function( require ) {
 	// 	   preparePayload();
 	//    }
 
-        // switch(step) {
-        //     case 1:
-        //         $('#step1').show();
-        //         connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
-        //         connection.trigger('updateButton', { button: 'back', visible: false });
-        //         break;
-        //     case 2:
-        //         $('#step2').show();
-        //         $('#showMessage').html(getMessage());
-        //         connection.trigger('updateButton', { button: 'back', visible: true });
-        //         connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
-        //         break;
-        //     case 3: // Only 2 steps, so the equivalent of 'done' - send off the payload
-        //         save();
-        //         break;
-        // }
+        switch(step) {
+            case 1:
+                $('#step1').show();
+                //connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
+                //connection.trigger('updateButton', { button: 'back', visible: false });
+                connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
+                break;
+            // case 2:
+            //     $('#step2').show();
+            //     $('#showMessage').html(getMessage());
+            //     connection.trigger('updateButton', { button: 'back', visible: true });
+            //     connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+            //     break;
+            case 2: // Only 2 steps, so the equivalent of 'done' - send off the payload
+                save();
+                break;
+        }
     };
 
     connection.on('clickedNext', function() {
