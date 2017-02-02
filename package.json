@@ -1,6 +1,6 @@
 {
-  "name": "helloWorldTwo",
-  "version": "0.0.3",
+  "name": "custom-activity",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node app.js"
