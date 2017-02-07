@@ -61,6 +61,8 @@ define( function( require ) {
     function gotoStep(step) {
        // $('.step').hide();
 		var stepStr = '#step' + step;
+		console.log('Current step:'  + step);
+		console.log('Step String: ' + stepStr);
        // remove the case statement ... better handled by if statement
 	   // special cases ... first step and last step ..
 	   // if step 1, remove the back button
@@ -69,23 +71,28 @@ define( function( require ) {
 	   // if step < numSteps (add the next button)
 	   // if step > numSteps - we done
        if (step == 1) {
+		    console.log('Do not show back button');
      		$("#show").val("'" + stepStr + "'");
 			connection.trigger('updateButton', { button: 'back', visible: false });
 	   }
 	   else if (step > 1 && step < numSteps) {			
+		    console.log('Show back button');
 			$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
     		$(stepStr).show();
     		connection.trigger('updateButton', { button: 'back', visible: true });
 	   }
 
 	   if (step == numSteps) {
+		console.log('Show done button');
 		$("#show").val("'" + stepStr + "'");
 		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 	   } else {
+		console.log('Show next button');
 		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
 	   } 
 
 	   if (step > numSteps) {
+		   console.log('Prepare payload');
 		   preparePayload();
 	   }
 	

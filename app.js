@@ -119,7 +119,7 @@ app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
     var caEditUrl = 'CA_EDIT_URL';
     var editCAUrl = process.env[caEditUrl];
     // add the number of steps to the query string ... not sensitive info
-    var numSteps = process.env['CA_NUM_STEPS'] || 1;
+    var numSteps = process.env['CA_NUM_STEPS'] || 1;    
     console.log("Number of steps: " + numSteps);
     var editCAUrl = editCAUrl + '?numSteps=' + numSteps;
 
