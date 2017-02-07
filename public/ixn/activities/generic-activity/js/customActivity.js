@@ -85,14 +85,14 @@ define( function( require ) {
 	   if (step == numSteps) {
 		console.log('Show done button');
 		$("#show").val("'" + stepStr + "'");
-		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true, enabled: true });
+		//connection.trigger('updateButton', { button: 'next', text: 'done', visible: true, enabled: true });
 	   } else {
 		console.log('Show next button');
 		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: true });
 	   } 
 
 	   if (step > numSteps) {
-		   console.log('Prepare payload');
+		   console.log('Saving');
 		   save();
 	   }
 	
@@ -127,21 +127,8 @@ define( function( require ) {
         connection.trigger('ready');
     });
 
-	/**
-		If you want to have a multi-step configuration view, you need to manage the DOM manually.
-		You can filter what changes to make by implementing the following type of logic when Postmonger from the server triggers an "updateStep" call.
-		// connection.on('updateStep', step ) {
-
-			if( step  >= 1 && step <= 3 ) {
-				$('.step').hide(); // All DOM elements which are steps should have this class (this hides them all)
-				$('#step' + step ).show(); // This selectively only displays the current step
-				// Allow the user to make any changes and when you're ready, use:
-				connection.trigger( 'updateStep', step ); 
-			}
-		}
-	**/
 	connection.on('updateStep', function( data ) {
-
+        console.log("calling preparePayload");
 		preparePayload();
 
         connection.trigger('updateActivity',inArgPayload);
@@ -198,6 +185,7 @@ define( function( require ) {
 	}
 
 	function save() {
+		console.log("Save");
 		inArgPayload.metaData.isConfigured = true;		
 	}
 
