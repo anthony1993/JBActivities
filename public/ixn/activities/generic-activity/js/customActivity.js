@@ -85,7 +85,7 @@ define( function( require ) {
 	   if (step == numSteps) {
 		console.log('Show done button');
 		$("#show").val("'" + stepStr + "'");
-		//connection.trigger('updateButton', { button: 'next', text: 'done', visible: true, enabled: true });
+		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 	   } else {
 		console.log('Show next button');
 		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: true });
