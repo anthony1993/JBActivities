@@ -201,6 +201,7 @@ define( function( require ) {
 	}
 
 	function getMessage () {
+		console.log("getMessage being called");
 		if($('messageInput') === 'undefined') {
 			console.log("messageInput undefined on this page ... return true.");
 			return true;	
