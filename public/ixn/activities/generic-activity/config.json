@@ -37,6 +37,10 @@
            "url": "https://{{ENDPOINT_NAME}}.herokuapp.com/validate"
        }
    },
+    "wizardSteps": [
+        { "label": "First Call", "key": "step1" },
+        { "label": "Second Call", "key": "step2" }
+    ],   
    "edit": {
 		"url": "https://{{HEROKU_APP_NAME}}.herokuapp.com/ixn/activities/generic-activity/index.html",
 		"height": "{{EDIT_HEIGHT}}",
