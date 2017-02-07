@@ -201,6 +201,11 @@ define( function( require ) {
 	}
 
 	function getMessage () {
-		return $('#messageInput').val().trim();	
+		if($('messageInput') === 'undefined') {
+			console.log("messageInput undefined on this page ... return true.");
+			return true;	
+		} else {
+			return $('#messageInput').val().trim();	
+		}
 	}
 });
