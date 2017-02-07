@@ -79,16 +79,16 @@ define( function( require ) {
 		    console.log('Show back button');
 			$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
     		$(stepStr).show();
-    		connection.trigger('updateButton', { button: 'back', visible: true });
+    		connection.trigger('updateButton', { button: 'back', visible: true, enabled: true });
 	   }
 
 	   if (step == numSteps) {
 		console.log('Show done button');
 		$("#show").val("'" + stepStr + "'");
-		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true, enabled: true });
 	   } else {
 		console.log('Show next button');
-		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
+		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: true });
 	   } 
 
 	   if (step > numSteps) {
