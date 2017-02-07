@@ -60,51 +60,52 @@ define( function( require ) {
 
     function gotoStep(step) {
        // $('.step').hide();
-
+		var stepStr = '#step' + step;
        // remove the case statement ... better handled by if statement
 	   // special cases ... first step and last step ..
-    //    if (step == 1) {
-    // 		$('#step1').show();
-	// 		if (step == numSteps)
-	// 		{
-    //             connection.trigger('updateButton', { button: 'back', visible: false });
-    //             connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
-	// 		}
-	// 		else {
-    //     		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
-    //     		connection.trigger('updateButton', { button: 'back', visible: false });
-	// 		}
-	//    }
-	//    else if(step < numSteps) {		   
-	// 		var stepStr = '#step' + step;
-	// 	 	$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
-    // 		$(stepStr).show();
-    // 		connection.trigger('updateButton', { button: 'back', visible: true });
-	// 		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });			        
-	//    }
-	//    else if (step == numSteps) {
+	   // if step 1, remove the back button
+	   // else, we have moved past step 1 and less than num steps, add a back button
+	   // if step == numSteps (add the done button)
+	   // if step < numSteps (add the next button)
+	   // if step > numSteps - we done
+       if (step == 1) {
+     		$("#show").val("'" + stepStr + "'");
+			connection.trigger('updateButton', { button: 'back', visible: false });
+	   }
+	   else if (step > 1 && step < numSteps) {			
+			$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
+    		$(stepStr).show();
+    		connection.trigger('updateButton', { button: 'back', visible: true });
+	   }
 
-	//    } else {
-	// 	   preparePayload();
-	//    }
+	   if (step == numSteps) {
+		$("#show").val("'" + stepStr + "'");
+		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+	   } else {
+		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
+	   } 
 
-        switch(step) {
-            case 1:
-                $('#step1').show();
-                //connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
-                //connection.trigger('updateButton', { button: 'back', visible: false });
-                connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
-                break;
-            // case 2:
-            //     $('#step2').show();
-            //     $('#showMessage').html(getMessage());
-            //     connection.trigger('updateButton', { button: 'back', visible: true });
-            //     connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
-            //     break;
-            case 2: // Only 2 steps, so the equivalent of 'done' - send off the payload
-                save();
-                break;
-        }
+	   if (step > numSteps) {
+		   preparePayload();
+	   }
+	
+        // switch(step) {
+        //     case 1:
+        //         $('#step1').show();
+        //         //connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
+        //         //connection.trigger('updateButton', { button: 'back', visible: false });
+        //         connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
+        //         break;
+        //     // case 2:
+        //     //     $('#step2').show();
+        //     //     $('#showMessage').html(getMessage());
+        //     //     connection.trigger('updateButton', { button: 'back', visible: true });
+        //     //     connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+        //     //     break;
+        //     case 2: // Only 2 steps, so the equivalent of 'done' - send off the payload
+        //         save();
+        //         break;
+        // }
     };
 
     connection.on('clickedNext', function() {
