@@ -93,7 +93,7 @@ define( function( require ) {
 
 	   if (step > numSteps) {
 		   console.log('Prepare payload');
-		   preparePayload();
+		   save();
 	   }
 	
         // switch(step) {
@@ -181,7 +181,6 @@ define( function( require ) {
     // this is essentially DONE
 	connection.on('clickedNext', function() {
 
-	 	preparePayload();
         connection.trigger('updateActivity',inArgPayload);
     });
 
@@ -191,13 +190,15 @@ define( function( require ) {
 		var value = getMessage();		
 
         console.log("inArgPayload: " + JSON.stringify(inArgPayload));
-
 		inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
 		inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
 
 		console.log('Message: ' + value);
 		
-		inArgPayload.metaData.isConfigured = true;
+	}
+
+	function save() {
+		inArgPayload.metaData.isConfigured = true;		
 	}
 
 	function getMessage () {
