@@ -72,19 +72,18 @@ define( function( require ) {
 	   // if step > numSteps - we done
        if (step == 1) {
 		    console.log('Do not show back button');
-     		$("#show").val("'" + stepStr + "'");
+     		$(stepStr).show();
 			connection.trigger('updateButton', { button: 'back', visible: false });
 	   }
 	   else if (step > 1 && step < numSteps) {			
 		    console.log('Show back button');
-			$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
     		$(stepStr).show();
     		connection.trigger('updateButton', { button: 'back', visible: true, enabled: true });
 	   }
 
 	   if (step == numSteps) {
 		console.log('Show done button');
-		$("#show").val("'" + stepStr + "'");
+		$(stepStr).show();
 		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 	   } else {
 		console.log('Show next button');
@@ -95,24 +94,6 @@ define( function( require ) {
 		   console.log('Saving');
 		   save();
 	   }
-	
-        // switch(step) {
-        //     case 1:
-        //         $('#step1').show();
-        //         //connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
-        //         //connection.trigger('updateButton', { button: 'back', visible: false });
-        //         connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
-        //         break;
-        //     // case 2:
-        //     //     $('#step2').show();
-        //     //     $('#showMessage').html(getMessage());
-        //     //     connection.trigger('updateButton', { button: 'back', visible: true });
-        //     //     connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
-        //     //     break;
-        //     case 2: // Only 2 steps, so the equivalent of 'done' - send off the payload
-        //         save();
-        //         break;
-        // }
     };
 
     connection.on('clickedNext', function() {
