@@ -59,7 +59,7 @@ define( function( require ) {
     });
 
     function gotoStep(step) {
-       // $('.step').hide();
+        $('.step').hide();
 		var stepStr = '#step' + step;
 		console.log('Current step:'  + step);
 		console.log('Step String: ' + stepStr);
@@ -119,6 +119,7 @@ define( function( require ) {
         step++;
         gotoStep(step);
         connection.trigger('ready');
+		connection.trigger('nextStep');
     });
 
     connection.on('clickedBack', function() {
