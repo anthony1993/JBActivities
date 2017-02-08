@@ -11,6 +11,7 @@ var parseString = require('xml2js').parseString;
 var fs = require('fs');
 
 var configjson  = require('./public/ixn/activities/generic-activity/config.json');
+var numSteps = process.env['CA_NUM_STEPS'] || 1;   
 
 // JB wants to be able to hit an index.html page ... just use this text to satisfy that request
 var indexhtml = "Placeholder for JB";
@@ -91,6 +92,7 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     var endpointName = 'ENDPOINT_NAME';
     var editHeight = 'EDIT_HEIGHT';
     var editWidth = 'EDIT_WIDTH';
+    var wizardSteps = 'WIZARD_STEPS';
     var executeEndpointURL = 'EXECUTE_ENDPOINT_URL';
     var endPointSearch = new RegExp('{{'+endpointName+'}}', 'g'); 
     var executeEndPointSearch = new RegExp('{{'+executeEndpointURL+'}}', 'g'); 
@@ -101,6 +103,7 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
 	json.configurationArguments.publish.url = configjson.configurationArguments.publish.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.validate.url = configjson.configurationArguments.validate.url.replace(endPointSearch,process.env[endpointName]);
 	json.edit.url = configjson.edit.url.replace(search,process.env[appName]);
+
 	search = new RegExp('{{'+actKey+'}}', 'g');
 	json.configurationArguments.applicationExtensionKey = configjson.configurationArguments.applicationExtensionKey.replace(search,process.env[actKey]);
 	search = new RegExp('{{'+actName+'}}', 'g');
@@ -110,16 +113,36 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     search = new RegExp('{{'+editHeight+'}}', 'g');
 	json.edit.height = convertNumberToInteger(configjson.edit.height.replace(search,process.env[editHeight]));    
     search = new RegExp('{{'+editWidth+'}}', 'g');	
-	json.edit.width = convertNumberToInteger(configjson.edit.width.replace(search,process.env[editWidth]));  
+	json.edit.width = convertNumberToInteger(configjson.edit.width.replace(search,process.env[editWidth])); 
+
+    // replace the wizard steps
+        //     { "label": "First Call", "key": "step1" },
+        // { "label": "Second Call", "key": "step2" }
+    var jsonSteps = [];
+    for (var i = 1; i <= numSteps; i++) { 
+        var label = {
+             label: "Step " + i,
+             key : "step" + i
+        }
+        jsonSteps.push(label);
+    }
+
+    var stepSearch = new RegExp('{{' + wizardSteps + '}}', 'g');    
+    json.wizardSteps = JSON.parse(configjson.wizardSteps.replace(stepSearch, JSON.stringify(jsonSteps)));
+        
     res.status(200).send( json );
 });
+
+function replacer(key, value) {
+  return value.replace(/[^\w\s]/gi, '');
+}
 
 // redirect to a page outside of this custom activity
 app.get( '/ixn/activities/generic-activity/index.html', function( req, res ) {
     var caEditUrl = 'CA_EDIT_URL';
     var editCAUrl = process.env[caEditUrl];
     // add the number of steps to the query string ... not sensitive info
-    var numSteps = process.env['CA_NUM_STEPS'] || 1;    
+     
     console.log("Number of steps: " + numSteps);
     var editCAUrl = editCAUrl + '?numSteps=' + numSteps;
 
