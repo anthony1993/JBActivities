@@ -98,15 +98,16 @@ define( function( require ) {
     };
 
     connection.on('clickedNext', function() {
-        step++;
-        gotoStep(step);
-        connection.trigger('ready');
-		connection.trigger('nextStep');
+        connection.trigger('nextStep');
+		step++;
+        gotoStep(step);		
+        connection.trigger('ready');		
     });
 
     connection.on('clickedBack', function() {
-        step--;
-        gotoStep(step);
+        connection.trigger('prevStep');
+		step--;
+        gotoStep(step);		
         connection.trigger('ready');
     });
 
@@ -147,13 +148,6 @@ define( function( require ) {
     connection.on('populateFields', function(payload) {
     });
 	
-    // this is essentially DONE
-	connection.on('clickedNext', function() {
-
-    	
-    });
-
-
     function preparePayload() {    
 
 		var value = getMessage();		
