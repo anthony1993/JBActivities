@@ -101,22 +101,23 @@ define( function( require ) {
         connection.trigger('nextStep');
 		step++;
         gotoStep(step);		
-        connection.trigger('ready');		
+		// call ready if valiadtion fails
+        // connection.trigger('ready');		
     });
 
     connection.on('clickedBack', function() {
         connection.trigger('prevStep');
 		step--;
         gotoStep(step);		
-        connection.trigger('ready');
+		// call ready if validation fails
+        //connection.trigger('ready');
     });
 
 	connection.on('updateStep', function( data ) {
-        console.log("calling preparePayload");
-		preparePayload();
+		// Called if the configuration flow needs to change
 
-        connection.trigger('updateActivity',inArgPayload);		
 	});
+	
 	// This listens for Journey Builder to send endpoints
 	// Parameter is either the endpoints data or an object with an
 	// "error" property containing the error message
