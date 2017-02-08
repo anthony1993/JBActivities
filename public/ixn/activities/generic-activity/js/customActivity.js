@@ -167,7 +167,7 @@ define( function( require ) {
     // this is essentially DONE
 	connection.on('clickedNext', function() {
 
-        // connection.trigger('updateActivity',inArgPayload);
+    	
     });
 
 
@@ -185,6 +185,7 @@ define( function( require ) {
 
 	function save() {
 		console.log("Save");
+		connection.trigger('updateActivity',inArgPayload);
 		inArgPayload.metaData.isConfigured = true;		
 	}
 
