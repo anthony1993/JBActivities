@@ -131,8 +131,7 @@ define( function( require ) {
         console.log("calling preparePayload");
 		preparePayload();
 
-        connection.trigger('updateActivity',inArgPayload);
-		
+        connection.trigger('updateActivity',inArgPayload);		
 	});
 	// This listens for Journey Builder to send endpoints
 	// Parameter is either the endpoints data or an object with an
@@ -168,7 +167,7 @@ define( function( require ) {
     // this is essentially DONE
 	connection.on('clickedNext', function() {
 
-        connection.trigger('updateActivity',inArgPayload);
+        // connection.trigger('updateActivity',inArgPayload);
     });
 
 
