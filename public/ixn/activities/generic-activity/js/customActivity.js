@@ -27,6 +27,25 @@ define( function( require ) {
 		//connection.trigger('requestPayload');
     });
 
+   connection.on('clickedNext', function() {
+		console.log("clicked next called ... and triggered next step!")
+		step++;
+        connection.trigger('nextStep');		
+//        gotoStep(step);		
+        // connection.trigger('ready');		
+    });
+
+    connection.on('clickedBack', function() {
+		step--;
+        connection.trigger('prevStep');
+		
+  //      gotoStep(step);		
+		// call ready if validation fails
+        // connection.trigger('ready');
+    });
+
+ 	connection.on('gotoStep', onGotoStep);
+
 	// This listens for Journey Builder to send tokens
 	// Parameter is either the tokens data or an object with an
 	// "error" property containing the error message
@@ -103,25 +122,6 @@ define( function( require ) {
         gotoStep(step);
         connection.trigger('ready');
     }	
-
-    connection.on('clickedNext', function() {
-		console.log("clicked next called ... and triggered next step!")
-		step++;
-        connection.trigger('nextStep');		
-//        gotoStep(step);		
-        // connection.trigger('ready');		
-    });
-
-    connection.on('clickedBack', function() {
-		step--;
-        connection.trigger('prevStep');
-		
-  //      gotoStep(step);		
-		// call ready if validation fails
-        // connection.trigger('ready');
-    });
-
- 	connection.on('gotoStep', onGotoStep);	
 
 	connection.on('updateStep', function( data ) {
 		// Called if the configuration flow needs to change
