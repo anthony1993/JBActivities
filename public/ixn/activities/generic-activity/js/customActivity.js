@@ -1,3 +1,9 @@
+requirejs.config({
+    paths: {
+        postmonger: 'js/postmonger'
+    }
+});
+
 function getUrlParameter(name) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
     var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
@@ -5,11 +11,11 @@ function getUrlParameter(name) {
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
 };
 
-define( function( require ) {
-	var Postmonger = require( 'postmonger' );
-	var $ = require( 'vendor/jquery.min' );
+define(['postmonger'], function(Postmonger) {
+    'use strict';
 
     var connection = new Postmonger.Session();
+
 	var tokens;
 	var endpoints;
 	var inArgPayload = {};
