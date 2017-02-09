@@ -104,6 +104,7 @@ define( function( require ) {
     };
 
     connection.on('clickedNext', function() {
+		console.log("clicked next called ... and triggered next step!")
         connection.trigger('nextStep');
 		step++;
 //        gotoStep(step);		
