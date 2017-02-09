@@ -4,13 +4,6 @@ requirejs.config({
     }
 });
 
-function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-};
-
 define(['postmonger'], function(Postmonger) {
     'use strict';
 
@@ -50,7 +43,11 @@ define(['postmonger'], function(Postmonger) {
         // connection.trigger('ready');
     });
 
- 	connection.on('gotoStep', onGotoStep);
+ 	connection.on('gotoStep', function () {
+	   console.log("calling gotoStep with " + step);
+        gotoStep(step);
+        connection.trigger('ready');
+    });
 
 	// This listens for Journey Builder to send tokens
 	// Parameter is either the tokens data or an object with an
@@ -123,12 +120,6 @@ define(['postmonger'], function(Postmonger) {
 
     }
 
-   function onGotoStep (step) {
-	   console.log("calling gotoStep with " + step);
-        gotoStep(step);
-        connection.trigger('ready');
-    }	
-
 	connection.on('updateStep', function( data ) {
 		// Called if the configuration flow needs to change
 
@@ -165,6 +156,13 @@ define(['postmonger'], function(Postmonger) {
     connection.on('populateFields', function(payload) {
     });
 	
+	function getUrlParameter(name) {
+		name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+		var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+		var results = regex.exec(location.search);
+		return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+	}
+
     function preparePayload() {    
 
 		var value = getMessage();		
