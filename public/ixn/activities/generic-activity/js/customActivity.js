@@ -58,12 +58,6 @@ define( function( require ) {
 
     });
 
-   function onGotoStep (step) {
-	   console.log("calling gotoStep with " + step);
-        gotoStep(step);
-        connection.trigger('ready');
-    };
-
     function gotoStep(step) {
         $('.step').hide();
 		var stepStr = '#step' + step;
@@ -102,19 +96,26 @@ define( function( require ) {
 		   save();
 	   }
 
-    };
+    }
+
+   function onGotoStep (step) {
+	   console.log("calling gotoStep with " + step);
+        gotoStep(step);
+        connection.trigger('ready');
+    }	
 
     connection.on('clickedNext', function() {
 		console.log("clicked next called ... and triggered next step!")
-        connection.trigger('nextStep');
 		step++;
+        connection.trigger('nextStep');		
 //        gotoStep(step);		
         // connection.trigger('ready');		
     });
 
     connection.on('clickedBack', function() {
-        connection.trigger('prevStep');
 		step--;
+        connection.trigger('prevStep');
+		
   //      gotoStep(step);		
 		// call ready if validation fails
         // connection.trigger('ready');
