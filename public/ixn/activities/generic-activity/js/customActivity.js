@@ -58,7 +58,10 @@ define( function( require ) {
 
     });
 
-connection.on('gotoStep', function(step) { ... });
+   function onGotoStep (step) {
+        gotoStep(step);
+        connection.trigger('ready');
+    };
 
     function gotoStep(step) {
         $('.step').hide();
@@ -103,14 +106,14 @@ connection.on('gotoStep', function(step) { ... });
     connection.on('clickedNext', function() {
         connection.trigger('nextStep');
 		step++;
-        gotoStep(step);		
+//        gotoStep(step);		
         connection.trigger('ready');		
     });
 
     connection.on('clickedBack', function() {
         connection.trigger('prevStep');
 		step--;
-        gotoStep(step);		
+  //      gotoStep(step);		
 		// call ready if validation fails
         connection.trigger('ready');
     });
