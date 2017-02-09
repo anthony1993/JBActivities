@@ -95,14 +95,14 @@ define( function( require ) {
 		   console.log('Saving');
 		   save();
 	   }
+
     };
 
     connection.on('clickedNext', function() {
         connection.trigger('nextStep');
 		step++;
         gotoStep(step);		
-		// call ready if valiadtion fails
-        // connection.trigger('ready');		
+        connection.trigger('ready');		
     });
 
     connection.on('clickedBack', function() {
@@ -110,14 +110,14 @@ define( function( require ) {
 		step--;
         gotoStep(step);		
 		// call ready if validation fails
-        //connection.trigger('ready');
+        connection.trigger('ready');
     });
 
 	connection.on('updateStep', function( data ) {
 		// Called if the configuration flow needs to change
 
 	});
-	
+
 	// This listens for Journey Builder to send endpoints
 	// Parameter is either the endpoints data or an object with an
 	// "error" property containing the error message
