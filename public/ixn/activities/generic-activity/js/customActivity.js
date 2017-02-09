@@ -59,6 +59,7 @@ define( function( require ) {
     });
 
    function onGotoStep (step) {
+	   console.log("calling gotoStep with " + step);
         gotoStep(step);
         connection.trigger('ready');
     };
