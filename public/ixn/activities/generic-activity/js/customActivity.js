@@ -58,6 +58,8 @@ define( function( require ) {
 
     });
 
+connection.on('gotoStep', function(step) { ... });
+
     function gotoStep(step) {
         $('.step').hide();
 		var stepStr = '#step' + step;
@@ -112,6 +114,8 @@ define( function( require ) {
 		// call ready if validation fails
         connection.trigger('ready');
     });
+
+ 	connection.on('gotoStep', onGotoStep);	
 
 	connection.on('updateStep', function( data ) {
 		// Called if the configuration flow needs to change
