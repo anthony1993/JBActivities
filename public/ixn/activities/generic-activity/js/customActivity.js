@@ -107,7 +107,7 @@ define( function( require ) {
         connection.trigger('nextStep');
 		step++;
 //        gotoStep(step);		
-        connection.trigger('ready');		
+        // connection.trigger('ready');		
     });
 
     connection.on('clickedBack', function() {
@@ -115,7 +115,7 @@ define( function( require ) {
 		step--;
   //      gotoStep(step);		
 		// call ready if validation fails
-        connection.trigger('ready');
+        // connection.trigger('ready');
     });
 
  	connection.on('gotoStep', onGotoStep);	
