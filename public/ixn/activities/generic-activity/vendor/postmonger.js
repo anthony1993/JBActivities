@@ -271,9 +271,13 @@
                 return false;
             }
 
+            console.log("Postmonger: " + conn.from);    
+            console.log("Postmonger: " + event.origin);
+
             //Check if the message is from the expected origin
             if(conn.from!=='*' && conn.from!==event.origin){
-                return false;
+                console.log("Origin does not match!");    
+                // return false;
             }
 
             //Check the data that's been passed

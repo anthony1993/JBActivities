@@ -21,7 +21,7 @@ define(['postmonger'], function(Postmonger) {
 
     $(window).ready(function() {
         connection.trigger('ready');
-		connection.trigger('requestTokens');
+		// connection.trigger('requestTokens');
 		connection.trigger('requestEndpoints');
 		//connection.trigger('requestPayload');
     });
