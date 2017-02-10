@@ -175,10 +175,13 @@ define(['postmonger'], function(Postmonger) {
    			 console.log("ID: " + this.id + " Name: " + this.name + " Value: " + this.value); //your code here
 			 var key;	
 
-			 if (this.id) 
-			  	inArgPayload['arguments'].execute.inArguments.push({this.id : this.value});
-			  else 
-			  	inArgPayload['arguments'].execute.inArguments.push({this.name : this.value}) 
+			 this.id ? key = this.id : key = this.name; 
+
+			 var formArg = {};
+			 formArg.key = key;
+			 formArg.value = this.value;
+
+			 inArgPayload['arguments'].execute.inArguments.push(formArg);
 		});				
 
 		connection.trigger('updateActivity',inArgPayload);
