@@ -1,6 +1,6 @@
 requirejs.config({
     paths: {
-        postmonger: 'vendor/postmonger'
+        postmonger: 'js/postmonger'
     }
 });
 

@@ -12,9 +12,11 @@
 (function(root, factory){
     if(typeof define === 'function' && define.amd) {
         define('postmonger', [], function(){ return factory(root); });
+        console.log("define'postmonger'");
     }else {
         root.Postmonger = factory(root);
-    }
+        console.log("root.Postmonger init'd");
+    }    
 }(this, function(root){
     root = root || window;
 
@@ -36,7 +38,8 @@
         return this;
     };
     Postmonger.version = '0.0.12';
-
+    console.log("Postmonger version: " + Postmonger.version);
+    
     //Create a new Postmonger Connection
     Connection = Postmonger.Connection = function(options){
         options = (typeof(options)==='object') ? options : {};
@@ -175,7 +178,6 @@
         };
 
         self.trigger = function(events){
-            console.log("Postmonger trigger: " + events);
             var event, node, calls, tail, args, all, rest;
 
             if (!(calls = self._callbacks)) {
@@ -185,13 +187,11 @@
             all = calls.all;
             events = events.split(eventSplitter);
             rest = Array.prototype.slice.call(arguments, 1);
-            console.log("Rest: " + rest);
 
             while (event = events.shift()) {
                 if (node = calls[event]) {
                     tail = node.tail;
                     while ((node = node.next) !== tail) {
-                        console.log("Postmonger: " + node.context + " calls[event]: " + event);
                         node.callback.apply(node.context || self, rest);
                     }
                 }
@@ -203,7 +203,7 @@
                     }
                 }
             }
-            console.log("Postmonger 1: " + self);    
+
             return self;
         };
 
@@ -256,7 +256,6 @@
 
         //Listener for incoming messages
         postMessageListener = function(event){
-            console.log("Inbound event: " + event);
             var conn = null;
             var message = [];
             var data;
@@ -275,9 +274,6 @@
                 return false;
             }
 
-            console.log("Postmonger: " + conn.from);    
-            console.log("Postmonger: " + event.origin);
-
             //Check if the message is from the expected origin
             if(conn.from!=='*' && conn.from!==event.origin){
                 return false;
@@ -286,13 +282,10 @@
             //Check the data that's been passed
             try{
                 data = JSON.parse(event.data);
-                console.log("Postmonger: parse data: " + JSON.stringify(data));
                 if(!data.e){
-                    console.log("Returning false...");
                     return false;
                 }
             }catch(e){
-                console.log("Exception!" + e);
                 return false;
             }
 
@@ -302,8 +295,6 @@
             for(k in data){
                 message.push(data[k]);
             }
-
-            console.log('Postmonger: sending message: ' + message);
 
             //Send the message
             incoming['trigger'].apply(root, message);
@@ -340,6 +331,5 @@
 
         return self;
     };
-
     return Postmonger;
 }));
