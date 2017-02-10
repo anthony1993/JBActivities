@@ -282,7 +282,7 @@
             //Check the data that's been passed
             try{
                 data = JSON.parse(event.data);
-                console.log("Parse data: " + data);
+                console.log("Postmonger: parse data: " + JSON.stringify(data));
                 if(!data.e){
                     console.log("Returning false...");
                     return false;
@@ -298,6 +298,8 @@
             for(k in data){
                 message.push(data[k]);
             }
+
+            console.log('Sending message: ' + message);
 
             //Send the message
             incoming['trigger'].apply(root, message);
