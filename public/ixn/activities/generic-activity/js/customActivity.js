@@ -58,12 +58,17 @@ define(['postmonger'], function(Postmonger) {
 			var jsonPayload = payload['arguments'].execute.inArguments;
 
 			if (typeof jsonPayload != "undefined" && jsonPayload.length > 0) {
-
+				console.log("getting keys")
 				// get the keys from the arguments array
-				for (var formKey in inArgPayload['arguments'].execute.inArguments) {
+				for (i = 0; i < jsonPayload.length; i++) {
+					
+					var obj = jsonPayload[i];
+				    var formKey = Object.keys(obj);     
+console.log("formkey: " + formKey);
 					var selector = '#' + formKey;
-					console.log(JSON.stringify(inArgPayload['arguments'].execute.inArguments))
-					var value = inArgPayload['arguments'].execute.inArguments[formKey];  
+					
+					var value = obj[formKey];  
+					console.log("Value: " + value);
 					$(selector).val(value);
 				}
 			}			
