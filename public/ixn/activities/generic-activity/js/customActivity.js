@@ -174,8 +174,11 @@ define(['postmonger'], function(Postmonger) {
 		$('#genericActivity *').filter(':input').each(function(){
    			 console.log("ID: " + this.id + " Name: " + this.name + " Value: " + this.value); //your code here
 			 var key;	
-		     this.id ? key = this.id : key = this.name;
-			 inArgPayload['arguments'].execute.inArguments.push({key : this.value});   
+
+			 if (this.id) 
+			  	inArgPayload['arguments'].execute.inArguments.push({this.id : this.value});
+			  else 
+			  	inArgPayload['arguments'].execute.inArguments.push({this.name : this.value}) 
 		});				
 
 		connection.trigger('updateActivity',inArgPayload);
