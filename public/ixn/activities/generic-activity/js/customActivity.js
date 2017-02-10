@@ -17,7 +17,6 @@ define(['postmonger'], function(Postmonger) {
     // get the # of steps
 	var numSteps = getUrlParameter('numSteps');
 	// do some error checking on the inbound num steps
-	console.log("numSteps " + numSteps);
 
     $(window).ready(function() {
         connection.trigger('ready');
@@ -29,22 +28,15 @@ define(['postmonger'], function(Postmonger) {
    connection.on('clickedNext', function() {		
 		console.log("clicked next step: " + step);
 		step++;
-        connection.trigger('nextStep');		
-//        gotoStep(step);		
-        //connection.trigger('ready');		
+        connection.trigger('nextStep');				
     });
 
     connection.on('clickedBack', function() {
 		step--;
         connection.trigger('prevStep');
-		
-  //      gotoStep(step);		
-		// call ready if validation fails
-        //connection.trigger('ready');
     });
 
  	connection.on('gotoStep', function () {
-	   console.log("calling gotoStep with " + step);
         gotoStep(step);
         connection.trigger('ready');
     });
@@ -83,8 +75,8 @@ define(['postmonger'], function(Postmonger) {
     function gotoStep(step) {
         $('.step').hide();
 		var stepStr = '#step' + step;
-		console.log('Current step:'  + step);
-		console.log('Step String: ' + stepStr);
+		// console.log('Current step:'  + step);
+		// console.log('Step String: ' + stepStr);
        // remove the case statement ... better handled by if statement
 	   // special cases ... first step and last step ..
 	   // if step 1, remove the back button
@@ -169,7 +161,13 @@ define(['postmonger'], function(Postmonger) {
 
         console.log("inArgPayload: " + JSON.stringify(inArgPayload));
 		inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
-		inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
+
+		// push all of the form names / values onto the args stack
+		$('#genericActivity *').find('input').each(function(){
+   			console.log("Name: " + this.name + " Value: " + this.value); //your code here
+		});				
+
+		// inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
 
 		console.log('Message: ' + value);
 		
