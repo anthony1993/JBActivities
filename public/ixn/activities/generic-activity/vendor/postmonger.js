@@ -175,6 +175,7 @@
         };
 
         self.trigger = function(events){
+            console.log("Postmonger trigger: " + events);
             var event, node, calls, tail, args, all, rest;
 
             if (!(calls = self._callbacks)) {
