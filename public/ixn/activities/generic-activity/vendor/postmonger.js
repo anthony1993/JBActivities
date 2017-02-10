@@ -179,6 +179,8 @@
             var event, node, calls, tail, args, all, rest;
 
             if (!(calls = self._callbacks)) {
+                console.log("Postmonger returning self...");
+                console.log("calls: " + JSON.stringify(self._callbacks));
                 return self;
             }
 
@@ -201,10 +203,10 @@
                     }
                 }
             }
-
+            console.log("Postmonger 1: " + self);    
             return self;
         };
-
+        console.log("Postmonger 2: " + self);
         return self;
     };
 
