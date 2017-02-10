@@ -28,10 +28,11 @@ define(['postmonger'], function(Postmonger) {
 
    connection.on('clickedNext', function() {
 		console.log("clicked next called ... and triggered next step!")
+		console.log("step: " + step);
 		step++;
         connection.trigger('nextStep');		
 //        gotoStep(step);		
-        connection.trigger('ready');		
+        //connection.trigger('ready');		
     });
 
     connection.on('clickedBack', function() {
@@ -40,7 +41,7 @@ define(['postmonger'], function(Postmonger) {
 		
   //      gotoStep(step);		
 		// call ready if validation fails
-        connection.trigger('ready');
+        //connection.trigger('ready');
     });
 
  	connection.on('gotoStep', function () {
