@@ -1,51 +1,64 @@
 {
-  "name": "Salesforce JB Custom Activity",
-  "description": "Create a Journey Builder Custom Activity for making an http request.",
-  "repository": "https://github.com/timsim00/http-request",
-  "keywords": ["journey", "builder", "marketing", "cloud", "custom", "activity", "salesforce"],
-  "logo": "http://image.s6.exacttarget.com/lib/fe9112727360007b77/m/1/Salesforce_Marketing_Cloud.png",
-  "env": {
-  	"HEROKU_APP_NAME": {
-		  "description" : "Name of the Heroku application above (either Heroku default or your custom name)."
-	  },
-  	"KEY": {
-		  "description" : "Application extension key - this must match exactly what is entered into the Journey Builder creation screen.",
-		  "required" : "true"
-	  },
-	"CA_IMG_40" : {
-		"description" : "Full https URL for the 40x40 pixel Custom Activity image."
-	},
-	"CA_IMG_15" : {
-		"description" : "Full https URL for the 15x15 pixel Custom Activity image."
-	},
-  	"ACTIVITY_NAME":{
-		"description" : "Name of the Custom Activity.",  
-  		"required":false,
-	    "value" : "Generic Custom Activity"
-  	},
-  	"ACTIVITY_DESCRIPTION":{
-  		"description" : "Description of the Custom Activity purpose or usage.",
-		"required":false
-  	},
-	"EXECUTE_ENDPOINT_URL" : {
-		"description" : "URL to handle the outbound requests from Journey Builder. Default value sends these to the generic request activity handler.",
-		"required" : "true",
-		"value" : "https://polar-taiga-52256.herokuapp.com/saveRequestConfig"
-	},
-  "ENDPOINT_NAME" : {
-	  "value" : "polar-taiga-52256",
-	  "description" : "Do not change this value - it handles the publish/save/validate calls for the Custom Activity."},
-	"CA_EDIT_URL" : {
-		"description" : "https URL of the edit window page (template can be found in this github repo)",
-		"required" : "true"
-	},
-	"EDIT_HEIGHT" : {
-		"description" : "Height of the Custom Activity edit window in pixels. (advanced)",
-		"value" : "600"
-	},
-	"EDIT_WIDTH" : {
-		"description" : "Height of the Custom Activity edit window in pixels. (advanced)",
-		"value" : "800"
-	}	  
-  }
+	"name": "Salesforce JB Custom Activity",
+	"description": "Create a Journey Builder Custom Activity for making an http request.",
+	"repository": "https://github.com/timsim00/http-request",
+	"keywords": [
+		"journey",
+		"builder",
+		"marketing",
+		"cloud",
+		"custom",
+		"activity",
+		"salesforce"
+	],
+	"logo": "http://image.s6.exacttarget.com/lib/fe9112727360007b77/m/1/Salesforce_Marketing_Cloud.png",
+	"env": {
+		"HEROKU_APP_NAME": {
+			"description": "Name of the Heroku application above (either Heroku default or your custom name)."
+		},
+		"KEY": {
+			"description": "Application extension key - this must match exactly what is entered into the Journey Builder creation screen.",
+			"required": "true"
+		},
+		"CA_IMG_40": {
+			"description": "Full https URL for the 40x40 pixel Custom Activity image."
+		},
+		"CA_IMG_15": {
+			"description": "Full https URL for the 15x15 pixel Custom Activity image."
+		},
+		"ACTIVITY_NAME": {
+			"description": "Name of the Custom Activity.",
+			"required": false,
+			"value": "Generic Custom Activity"
+		},
+		"ACTIVITY_DESCRIPTION": {
+			"description": "Description of the Custom Activity purpose or usage.",
+			"required": false
+		},
+		"EXECUTE_ENDPOINT_URL": {
+			"description": "URL to handle the outbound requests from Journey Builder. Default value sends these to the generic request activity handler.",
+			"required": "true",
+			"value": "https://polar-taiga-52256.herokuapp.com/saveGenericConfig"
+		},
+		"ENDPOINT_NAME": {
+			"value": "polar-taiga-52256",
+			"description": "Do not change this value - it handles the publish/save/validate calls for the Custom Activity."
+		},
+		"CA_EDIT_URL": {
+			"description": "https URL of the edit window page (template can be found in this github repo)",
+			"required": "true"
+		},
+		"EDIT_HEIGHT": {
+			"description": "Height of the Custom Activity edit window in pixels. (advanced)",
+			"value": "600"
+		},
+		"EDIT_WIDTH": {
+			"description": "Height of the Custom Activity edit window in pixels. (advanced)",
+			"value": "800"
+		},
+		"CA_NUM_STEPS" : {
+			"description" : "Number of steps needed in your custom activity configuration wizard",
+			"value" : "1"
+		}
+	}
 }

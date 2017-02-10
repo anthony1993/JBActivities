@@ -58,17 +58,15 @@ define(['postmonger'], function(Postmonger) {
 			var jsonPayload = payload['arguments'].execute.inArguments;
 
 			if (typeof jsonPayload != "undefined" && jsonPayload.length > 0) {
-				console.log("getting keys")
+
 				// get the keys from the arguments array
 				for (var i = 0; i < jsonPayload.length; i++) {
 					
 					var obj = jsonPayload[i];
 				    var formKey = Object.keys(obj);     
-console.log("formkey: " + formKey);
-					var selector = '#' + formKey;
-					
+					var selector = '#' + formKey;					
 					var value = obj[formKey];  
-					console.log("Value: " + value);
+
 					$(selector).val(value);
 				}
 			}			
@@ -94,18 +92,21 @@ console.log("formkey: " + formKey);
        if (step == 1) {
 		    console.log('Do not show back button');
      		$(stepStr).show();
+			$(stepStr).trigger('isVisible');
 			connection.trigger('updateButton', { button: 'back', visible: false });
 	   }
 	   else if (step > 1 && step < numSteps) {			
 		    console.log('Show back button');
     		$(stepStr).show();
+			$(stepStr).trigger('isVisible');
     		connection.trigger('updateButton', { button: 'back', visible: true, enabled: true });
 	   }
 
 	   if (step == numSteps) {
-		console.log('Show done button');
-		if(step != 1)
+		if(step != 1) {
 			$(stepStr).show();
+			$(stepStr).trigger('isVisible');
+		}
 		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 	   } else {
 		console.log('Show next button');
