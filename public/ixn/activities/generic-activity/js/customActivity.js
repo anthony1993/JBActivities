@@ -178,8 +178,7 @@ define(['postmonger'], function(Postmonger) {
 			 this.id ? key = this.id : key = this.name; 
 
 			 var formArg = {};
-			 formArg.key = key;
-			 formArg.value = this.value;
+			 formArg[key] = this.value;
 
 			 inArgPayload['arguments'].execute.inArguments.push(formArg);
 		});				
