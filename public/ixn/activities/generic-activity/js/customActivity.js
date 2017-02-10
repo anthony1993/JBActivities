@@ -167,14 +167,15 @@ define(['postmonger'], function(Postmonger) {
 	}
 
 	function save() {
-		console.log("Save");
 
-        console.log("inArgPayload: " + JSON.stringify(inArgPayload));
 		inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
 
 		// push all of the form names / values onto the args stack		
 		$('#genericActivity *').filter(':input').each(function(){
-   			console.log("ID: " + this.id + " Name: " + this.name + " Value: " + this.value); //your code here
+   			 console.log("ID: " + this.id + " Name: " + this.name + " Value: " + this.value); //your code here
+			 var key;	
+		     this.id ? key = this.id : key = this.name;
+			 inArgPayload['arguments'].execute.inArguments.push({key : this.value});   
 		});				
 
 		connection.trigger('updateActivity',inArgPayload);
