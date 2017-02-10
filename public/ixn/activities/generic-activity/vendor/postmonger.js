@@ -179,14 +179,13 @@
             var event, node, calls, tail, args, all, rest;
 
             if (!(calls = self._callbacks)) {
-                console.log("Postmonger returning self...");
-                console.log("calls: " + JSON.stringify(self._callbacks));
                 return self;
             }
 
             all = calls.all;
             events = events.split(eventSplitter);
             rest = Array.prototype.slice.call(arguments, 1);
+            console.log("Rest: " + rest);
 
             while (event = events.shift()) {
                 if (node = calls[event]) {
