@@ -26,11 +26,13 @@ define(['postmonger'], function(Postmonger) {
 		//connection.trigger('requestPayload');
     });
 
-   connection.on('clickedNext', function() {
-		console.log("clicked next called ... and triggered next step!")
-		console.log("step: " + step);
+   connection.on('clickedNext', function() {		
+		console.log("clicked next step: " + step);
 		step++;
         connection.trigger('nextStep');		
+		connection.trigger('prevStep');
+		connection.trigger('requestEndpoints');
+
 //        gotoStep(step);		
         //connection.trigger('ready');		
     });
