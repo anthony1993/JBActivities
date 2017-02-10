@@ -192,7 +192,7 @@
                 if (node = calls[event]) {
                     tail = node.tail;
                     while ((node = node.next) !== tail) {
-                        console.log("Postmonger: " + node.context + " calls[event]: " + calls[event]);
+                        console.log("Postmonger: " + node.context + " calls[event]: " + event);
                         node.callback.apply(node.context || self, rest);
                     }
                 }
