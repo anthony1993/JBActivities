@@ -276,17 +276,19 @@
 
             //Check if the message is from the expected origin
             if(conn.from!=='*' && conn.from!==event.origin){
-                console.log("Origin does not match!");    
-                // return false;
+                return false;
             }
 
             //Check the data that's been passed
             try{
                 data = JSON.parse(event.data);
+                console.log("Parse data: " + data);
                 if(!data.e){
+                    console.log("Returning false...");
                     return false;
                 }
             }catch(e){
+                console.log("Exception!" + e);
                 return false;
             }
 
