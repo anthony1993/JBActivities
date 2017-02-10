@@ -159,13 +159,6 @@ define(['postmonger'], function(Postmonger) {
 
 		var value = getMessage();		
 
-        console.log("inArgPayload: " + JSON.stringify(inArgPayload));
-		inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
-
-		// push all of the form names / values onto the args stack
-		$('#genericActivity *').find('input').each(function(){
-   			console.log("Name: " + this.name + " Value: " + this.value); //your code here
-		});				
 
 		// inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
 
@@ -175,6 +168,15 @@ define(['postmonger'], function(Postmonger) {
 
 	function save() {
 		console.log("Save");
+
+        console.log("inArgPayload: " + JSON.stringify(inArgPayload));
+		inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
+
+		// push all of the form names / values onto the args stack
+		$('#genericActivity *').find('input').each(function(){
+   			console.log("Name: " + this.name + " Value: " + this.value); //your code here
+		});				
+
 		connection.trigger('updateActivity',inArgPayload);
 		inArgPayload.metaData.isConfigured = true;		
 	}
