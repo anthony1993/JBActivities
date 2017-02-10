@@ -253,6 +253,7 @@
 
         //Listener for incoming messages
         postMessageListener = function(event){
+            console.log("Inbound event: " + event);
             var conn = null;
             var message = [];
             var data;
@@ -299,7 +300,7 @@
                 message.push(data[k]);
             }
 
-            console.log('Sending message: ' + message);
+            console.log('Postmonger: sending message: ' + message);
 
             //Send the message
             incoming['trigger'].apply(root, message);
