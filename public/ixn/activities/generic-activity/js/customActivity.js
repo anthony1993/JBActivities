@@ -20,9 +20,7 @@ define(['postmonger'], function(Postmonger) {
 
     $(window).ready(function() {
         connection.trigger('ready');
-		// connection.trigger('requestTokens');
 		connection.trigger('requestEndpoints');
-		//connection.trigger('requestPayload');
     });
 
    connection.on('clickedNext', function() {		
@@ -61,9 +59,13 @@ define(['postmonger'], function(Postmonger) {
 
 			if (typeof jsonPayload != "undefined" && jsonPayload.length > 0) {
 
-				var message = inArgPayload['arguments'].execute.inArguments[0].displayMessage;
-				
-				$("#messageInput").val(message);
+				// get the keys from the arguments array
+				for (var formKey in inArgPayload['arguments'].execute.inArguments) {
+					var selector = '#' + formKey;
+					console.log(JSON.stringify(inArgPayload['arguments'].execute.inArguments))
+					var value = inArgPayload['arguments'].execute.inArguments[formKey];  
+					$(selector).val(value);
+				}
 			}			
 
         }
@@ -185,15 +187,5 @@ define(['postmonger'], function(Postmonger) {
 
 		connection.trigger('updateActivity',inArgPayload);
 		inArgPayload.metaData.isConfigured = true;		
-	}
-
-	function getMessage () {
-		console.log("getMessage being called");
-		if($('messageInput') === 'undefined') {
-			console.log("messageInput undefined on this page ... return true.");
-			return true;	
-		} else {
-			return $('#messageInput').val().trim();	
-		}
 	}
 });
