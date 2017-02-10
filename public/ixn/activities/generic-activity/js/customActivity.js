@@ -30,9 +30,6 @@ define(['postmonger'], function(Postmonger) {
 		console.log("clicked next step: " + step);
 		step++;
         connection.trigger('nextStep');		
-		connection.trigger('prevStep');
-		connection.trigger('requestEndpoints');
-
 //        gotoStep(step);		
         //connection.trigger('ready');		
     });
