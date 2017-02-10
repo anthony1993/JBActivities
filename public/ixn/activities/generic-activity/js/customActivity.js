@@ -60,7 +60,7 @@ define(['postmonger'], function(Postmonger) {
 			if (typeof jsonPayload != "undefined" && jsonPayload.length > 0) {
 				console.log("getting keys")
 				// get the keys from the arguments array
-				for (i = 0; i < jsonPayload.length; i++) {
+				for (var i = 0; i < jsonPayload.length; i++) {
 					
 					var obj = jsonPayload[i];
 				    var formKey = Object.keys(obj);     
