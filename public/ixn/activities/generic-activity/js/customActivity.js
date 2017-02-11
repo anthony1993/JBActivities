@@ -80,6 +80,9 @@ define(['postmonger'], function(Postmonger) {
     function gotoStep(step) {
         $('.step').hide();
 		var stepStr = '#step' + step;
+
+		var event = document.createEvent('CustomEvent');  
+
 		// console.log('Current step:'  + step);
 		// console.log('Step String: ' + stepStr);
        // remove the case statement ... better handled by if statement
@@ -92,20 +95,20 @@ define(['postmonger'], function(Postmonger) {
        if (step == 1) {
 		    console.log('Do not show back button');
      		$(stepStr).show();			
-			$.event.trigger({type: "isVisible"});
+			event.initEvent('isVisible', true, false);  
 			connection.trigger('updateButton', { button: 'back', visible: false });
 	   }
 	   else if (step > 1 && step < numSteps) {			
 		    console.log('Show back button');
     		$(stepStr).show();
-			$.event.trigger({type: "isVisible"});
+			event.initEvent('isVisible', true, false);  
     		connection.trigger('updateButton', { button: 'back', visible: true, enabled: true });
 	   }
 
 	   if (step == numSteps) {
 		if(step != 1) {
 			$(stepStr).show();
-			$.event.trigger({type: "isVisible"});
+			event.initEvent('isVisible', true, false);  
 		}
 		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 	   } else {
@@ -117,7 +120,8 @@ define(['postmonger'], function(Postmonger) {
 		   console.log('Saving');
 		   save();
 	   }
-
+	
+	document.dispatchEvent(event);  
     }
 
 	connection.on('updateStep', function( data ) {
