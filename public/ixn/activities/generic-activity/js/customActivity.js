@@ -4,12 +4,10 @@ requirejs.config({
     }
 });
 
-var connection;
-
 define(['postmonger'], function(Postmonger) {
     'use strict';
 
- 	connection = new Postmonger.Session();
+ 	window.connection = new Postmonger.Session();
 
 	var tokens;
 	var endpoints;
