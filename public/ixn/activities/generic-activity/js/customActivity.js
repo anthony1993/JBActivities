@@ -84,7 +84,7 @@ define(['postmonger'], function(Postmonger) {
 		var event = new CustomEvent('isVisible', 
 			{
 				detail: {
-				detail: step
+				step: step
 			},
 			bubbles: true,
 			cancelable: false
