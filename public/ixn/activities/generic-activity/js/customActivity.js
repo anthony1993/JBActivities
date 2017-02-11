@@ -81,7 +81,7 @@ define(['postmonger'], function(Postmonger) {
         $('.step').hide();
 		var stepStr = '#step' + step;
 
-		var event = document.createEvent('CustomEvent');  
+		var event = new CustomEvent('isVisible', { 'detail': step });
 
 		// console.log('Current step:'  + step);
 		// console.log('Step String: ' + stepStr);
@@ -95,20 +95,17 @@ define(['postmonger'], function(Postmonger) {
        if (step == 1) {
 		    console.log('Do not show back button');
      		$(stepStr).show();			
-			event.initEvent('isVisible', true, false, step);  
 			connection.trigger('updateButton', { button: 'back', visible: false });
 	   }
 	   else if (step > 1 && step < numSteps) {			
 		    console.log('Show back button');
     		$(stepStr).show();
-			event.initEvent('isVisible', true, false, step);  
     		connection.trigger('updateButton', { button: 'back', visible: true, enabled: true });
 	   }
 
 	   if (step == numSteps) {
 		if(step != 1) {
 			$(stepStr).show();
-			event.initEvent('isVisible', true, false, step);  
 		}
 		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 	   } else {
