@@ -81,7 +81,14 @@ define(['postmonger'], function(Postmonger) {
         $('.step').hide();
 		var stepStr = '#step' + step;
 
-		var event = new CustomEvent('isVisible', { 'detail': step });
+		var event = new CustomEvent('isVisible', 
+			{
+				detail: {
+				detail: step
+			},
+			bubbles: true,
+			cancelable: false
+		});
 
 		// console.log('Current step:'  + step);
 		// console.log('Step String: ' + stepStr);
