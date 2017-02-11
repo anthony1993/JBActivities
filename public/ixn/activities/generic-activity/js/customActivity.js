@@ -4,10 +4,12 @@ requirejs.config({
     }
 });
 
+var connection;
+
 define(['postmonger'], function(Postmonger) {
     'use strict';
 
-    var connection = new Postmonger.Session();
+ 	connection = new Postmonger.Session();
 
 	var tokens;
 	var endpoints;
@@ -92,20 +94,20 @@ define(['postmonger'], function(Postmonger) {
        if (step == 1) {
 		    console.log('Do not show back button');
      		$(stepStr).show();
-			$(stepStr).trigger('isVisible');
+			connection.trigger('isVisible');
 			connection.trigger('updateButton', { button: 'back', visible: false });
 	   }
 	   else if (step > 1 && step < numSteps) {			
 		    console.log('Show back button');
     		$(stepStr).show();
-			$(stepStr).trigger('isVisible');
+			connection.trigger('isVisible');
     		connection.trigger('updateButton', { button: 'back', visible: true, enabled: true });
 	   }
 
 	   if (step == numSteps) {
 		if(step != 1) {
 			$(stepStr).show();
-			$(stepStr).trigger('isVisible');
+			connection.trigger('isVisible');
 		}
 		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
 	   } else {
