@@ -30,7 +30,7 @@
 	"EXECUTE_ENDPOINT_URL" : {
 		"description" : "URL to handle the outbound requests from Journey Builder. Default value sends these to the generic request activity handler.",
 		"required" : "true",
-		"value" : "https://polar-taiga-52256.herokuapp.com/saveRequestConfig"
+		"value" : "https://polar-taiga-52256.herokuapp.com/saveGenericConfig"
 	},
   "ENDPOINT_NAME" : {
 	  "value" : "polar-taiga-52256",

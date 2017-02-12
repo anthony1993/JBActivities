@@ -11,10 +11,12 @@
 * KEY - key of JB activity created in app center
 * CA_IMG_40 - 40px Custom Activity logo location (absolute URL required)
 * CA_IMG_15 - 15px Custom Activity logo location (absolute URL required)
+* EXECUTE_ENDPOINT_URL - full endpoint URL to send JB Activity events (can leave as default)
 * ENDPOINT_NAME - polar-taiga
 * CA_EDIT_URL - https URL of the edit window page (template can be found in this github repo)
 * EDIT_HEIGHT - height of the Custom Activity config window 
 * EDIT_WIDTH - width of the Custom Activity config window
+* CA_NUM_STEPS - the number of configuration steps your Custom Activity will have
 
 The above parameters and their descriptions will be available when you click on the "Deploy" button below.
 
