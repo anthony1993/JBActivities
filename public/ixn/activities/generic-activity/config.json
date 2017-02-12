@@ -1,5 +1,5 @@
 {
-   "workflowApiVersion": "1.0",
+   "workflowApiVersion": "1.1",
    "metaData": {
        "icon": "images/icon.png",
        "iconSmall": "images/iconSmall.png",
@@ -37,6 +37,7 @@
            "url": "https://{{ENDPOINT_NAME}}.herokuapp.com/validate"
        }
    },
+    "wizardSteps": "{{WIZARD_STEPS}}",   
    "edit": {
 		"url": "https://{{HEROKU_APP_NAME}}.herokuapp.com/ixn/activities/generic-activity/index.html",
 		"height": "{{EDIT_HEIGHT}}",

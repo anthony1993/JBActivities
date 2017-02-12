@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<!-- 
+
+This is a sample HTML page that can be used as a starting point for a Journey Builder event customization.
+
+-->
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Custom Journey Builder Activity</title>
+    <!-- TODO: Change ups-activity to YOUR Heroku app name! This will break if ups-activity is deleted or not responsive! -->
+    <script data-main="https://ups-activity.herokuapp.com/ixn/activities/generic-activity/js/main.js" src="https://ups-activity.herokuapp.com/ixn/activities/generic-activity/js/require.js"></script>
+  <!-- -->
+  <script type="text/javascript">
+     function showhide(id) {
+       var e = document.getElementById(id);
+       e.style.display = (e.style.display == 'block') ? 'none' : 'block';
+     }
+  </script>  
+  
+  <style>
+  /* TODO: add your style inline here ... if you have a large block of CSS use the include that is commented out below */
+  body {
+    margin: 0px;
+    padding: 0px;
+  }
+
+  #container {
+      margin: 30px;
+  }
+    
+  body {
+    /* REMOVABLE: UPS Background Gradient - example ... generator: http://angrytools.com/gradient/ */  
+    background: -moz-linear-gradient(270deg, rgba(207,181,59,1) 0%, rgba(255,255,255,1) 100%); /* ff3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(207,181,59,1)), color-stop(100%, rgba(255,255,255,1))); /* safari4+,chrome */
+    background: -webkit-linear-gradient(270deg, rgba(207,181,59,1) 0%, rgba(255,255,255,1) 100%); /* safari5.1+,chrome10+ */
+    background: -o-linear-gradient(270deg, rgba(207,181,59,1) 0%, rgba(255,255,255,1) 100%); /* opera 11.10+ */
+    background: -ms-linear-gradient(270deg, rgba(207,181,59,1) 0%, rgba(255,255,255,1) 100%); /* ie10+ */
+    background: linear-gradient(180deg, rgba(207,181,59,1) 0%, rgba(255,255,255,1) 100%); /* w3c */
+  }
+
+  </style>
+  
+ <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+ <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <!-- link rel="stylesheet" href="<URL to .css>" -->    
+
+    <script type="text/javascript">
+       /* Regular old Javascript can be supported here */                             
+    </script>
+</head>
+  
+<body> 
+  
+  <!-- Handy if you want to hide show steps on the page when not being served up in Journey Builder 
+  <a href="javascript:showhide('step1')">
+    Click to show/hide first div.
+  </a>  
+  <a href="javascript:showhide('step2')">
+    Click to show/hide second div.
+  </a>
+  -->
+  
+<!-- TODO: Change this to be relevant for your example! -->
+<!-- form name must be genericActivity for the fields to be populated correctly --> 
+<form id="genericActivity">
+    <div id="step1" class="step">
+        <div class="col-xs-9">            
+            <h3>Billing Notifications</h3>
+            <div class="well">
+                <fieldset>
+                    <legend>Settings</legend>
+                    <div class="form-group">
+                        <label for="sel1" class="col-lg-4 control-label">Type</label>
+                        <div class="col-lg-8">
+                            <select class="form-control" id="type">
+                                <option></option>
+                                <option>Renewed</option>
+                                <option>Overdue</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="comments" class="col-lg-4 control-label">Comments</label>
+                        <div class="col-lg-8">
+                            <textarea class="form-control" rows="3" id="comments"></textarea>
+                            <span class="help-block">Provide text to be delivered with the billing notification.</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="cid" class="col-lg-4 control-label">MID</label>
+                        <div class="col-lg-8">
+                            <input type="text" id="mid" value="1352251">
+                        </div>
+                    </div>                    
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div id="step2" class="step" style="display:none;">
+        <div class="col-xs-8">
+            <h3>Please confirm your settings</h3>
+            <div class="well">
+                <fieldset>
+                    <legend>Contents</legend>
+                    <div class="form-group">
+                        <p class="col-lg-10" id="confirmationMessage">
+
+                        </p>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</form>
+  
+<script>
+    /* Maybe you want to do some jQuery stuff on this page? You can do it here. 
+       If you want to do activities when the div is made visible, you'll need to tie
+       into the isVisible event illustrated below. On this, when step 2 is made avaiable
+       an isVisible event is triggered, and you can tap into it and do stuff when its caught.
+    */  
+  window.addEventListener("isVisible", function(evt) {
+      console.log("Step: " + JSON.stringify(evt.detail.step) + " is now visible");
+      var step = evt.detail.step;
+      if(step == 2) {
+        console.log("Comments: " + $("#type option:selected").text());
+        var confirmation = "Type: " + $("#type option:selected").text() + "</br>";
+        confirmation += "Comments: " + $("#comments").val() + "</br>"; 
+        confirmation += "MID: " + $("#mid").val() + "</br>"; 
+        $("#confirmationMessage").html(confirmation);            
+      }
+  }, false);
+
+  
+</script>
+
+</body>
+</html>

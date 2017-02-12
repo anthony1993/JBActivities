@@ -12,9 +12,11 @@
 (function(root, factory){
     if(typeof define === 'function' && define.amd) {
         define('postmonger', [], function(){ return factory(root); });
+        console.log("define'postmonger'");
     }else {
         root.Postmonger = factory(root);
-    }
+        console.log("root.Postmonger init'd");
+    }    
 }(this, function(root){
     root = root || window;
 
@@ -36,7 +38,8 @@
         return this;
     };
     Postmonger.version = '0.0.12';
-
+    console.log("Postmonger version: " + Postmonger.version);
+    
     //Create a new Postmonger Connection
     Connection = Postmonger.Connection = function(options){
         options = (typeof(options)==='object') ? options : {};
@@ -328,6 +331,5 @@
 
         return self;
     };
-
     return Postmonger;
 }));

@@ -1,15 +1,14 @@
-function getUrlParameter(name) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
-    return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
-};
+requirejs.config({
+    paths: {
+        postmonger: 'js/postmonger'
+    }
+});
 
-define( function( require ) {
-	var Postmonger = require( 'postmonger' );
-	var $ = require( 'vendor/jquery.min' );
+define(['postmonger'], function(Postmonger) {
+    'use strict';
 
-    var connection = new Postmonger.Session();
+ 	var connection = new Postmonger.Session();
+
 	var tokens;
 	var endpoints;
 	var inArgPayload = {};
@@ -18,13 +17,26 @@ define( function( require ) {
     // get the # of steps
 	var numSteps = getUrlParameter('numSteps');
 	// do some error checking on the inbound num steps
-	console.log("numSteps " + numSteps);
 
     $(window).ready(function() {
         connection.trigger('ready');
-		connection.trigger('requestTokens');
 		connection.trigger('requestEndpoints');
-		//connection.trigger('requestPayload');
+    });
+
+   connection.on('clickedNext', function() {		
+		console.log("clicked next step: " + step);
+		step++;
+        connection.trigger('nextStep');				
+    });
+
+    connection.on('clickedBack', function() {
+		step--;
+        connection.trigger('prevStep');
+    });
+
+ 	connection.on('gotoStep', function () {
+        gotoStep(step);
+        connection.trigger('ready');
     });
 
 	// This listens for Journey Builder to send tokens
@@ -47,9 +59,16 @@ define( function( require ) {
 
 			if (typeof jsonPayload != "undefined" && jsonPayload.length > 0) {
 
-				var message = inArgPayload['arguments'].execute.inArguments[0].displayMessage;
-				
-				$("#messageInput").val(message);
+				// get the keys from the arguments array
+				for (var i = 0; i < jsonPayload.length; i++) {
+					
+					var obj = jsonPayload[i];
+				    var formKey = Object.keys(obj);     
+					var selector = '#' + formKey;					
+					var value = obj[formKey];  
+
+					$(selector).val(value);
+				}
 			}			
 
         }
@@ -59,85 +78,61 @@ define( function( require ) {
     });
 
     function gotoStep(step) {
-       // $('.step').hide();
+        $('.step').hide();
+		var stepStr = '#step' + step;
 
+		var event = new CustomEvent('isVisible', 
+			{
+				detail: {
+				step: step
+			},
+			bubbles: true,
+			cancelable: false
+		});
+
+		// console.log('Current step:'  + step);
+		// console.log('Step String: ' + stepStr);
        // remove the case statement ... better handled by if statement
 	   // special cases ... first step and last step ..
-    //    if (step == 1) {
-    // 		$('#step1').show();
-	// 		if (step == numSteps)
-	// 		{
-    //             connection.trigger('updateButton', { button: 'back', visible: false });
-    //             connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });				
-	// 		}
-	// 		else {
-    //     		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
-    //     		connection.trigger('updateButton', { button: 'back', visible: false });
-	// 		}
-	//    }
-	//    else if(step < numSteps) {		   
-	// 		var stepStr = '#step' + step;
-	// 	 	$("#show").val("'" + stepStr + "'"); // If you still want to display single quotes
-    // 		$(stepStr).show();
-    // 		connection.trigger('updateButton', { button: 'back', visible: true });
-	// 		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });			        
-	//    }
-	//    else if (step == numSteps) {
+	   // if step 1, remove the back button
+	   // else, we have moved past step 1 and less than num steps, add a back button
+	   // if step == numSteps (add the done button)
+	   // if step < numSteps (add the next button)
+	   // if step > numSteps - we done
+       if (step == 1) {
+		    console.log('Do not show back button');
+     		$(stepStr).show();			
+			connection.trigger('updateButton', { button: 'back', visible: false });
+	   }
+	   else if (step > 1 && step < numSteps) {			
+		    console.log('Show back button');
+    		$(stepStr).show();
+    		connection.trigger('updateButton', { button: 'back', visible: true, enabled: true });
+	   }
 
-	//    } else {
-	// 	   preparePayload();
-	//    }
-
-        // switch(step) {
-        //     case 1:
-        //         $('#step1').show();
-        //         connection.trigger('updateButton', { button: 'next', text: 'next', enabled: Boolean(getMessage()) });
-        //         connection.trigger('updateButton', { button: 'back', visible: false });
-        //         break;
-        //     case 2:
-        //         $('#step2').show();
-        //         $('#showMessage').html(getMessage());
-        //         connection.trigger('updateButton', { button: 'back', visible: true });
-        //         connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
-        //         break;
-        //     case 3: // Only 2 steps, so the equivalent of 'done' - send off the payload
-        //         save();
-        //         break;
-        // }
-    };
-
-    connection.on('clickedNext', function() {
-        step++;
-        gotoStep(step);
-        connection.trigger('ready');
-    });
-
-    connection.on('clickedBack', function() {
-        step--;
-        gotoStep(step);
-        connection.trigger('ready');
-    });
-
-	/**
-		If you want to have a multi-step configuration view, you need to manage the DOM manually.
-		You can filter what changes to make by implementing the following type of logic when Postmonger from the server triggers an "updateStep" call.
-		// connection.on('updateStep', step ) {
-
-			if( step  >= 1 && step <= 3 ) {
-				$('.step').hide(); // All DOM elements which are steps should have this class (this hides them all)
-				$('#step' + step ).show(); // This selectively only displays the current step
-				// Allow the user to make any changes and when you're ready, use:
-				connection.trigger( 'updateStep', step ); 
-			}
+	   if (step == numSteps) {
+		if(step != 1) {
+			$(stepStr).show();
 		}
-	**/
+		connection.trigger('updateButton', { button: 'next', text: 'done', visible: true });
+	   } else {
+		console.log('Show next button');
+		connection.trigger('updateButton', { button: 'next', text: 'next', enabled: true });
+	   } 
+
+	   if (step > numSteps) {
+		   console.log('Saving');
+		   save();
+	   }
+	
+		document.dispatchEvent(event);  
+    }
+
 	connection.on('updateStep', function( data ) {
+		// Called if the configuration flow needs to change
 
-		preparePayload();
-
-        connection.trigger('updateActivity',inArgPayload);
-		
 	});
+
 	// This listens for Journey Builder to send endpoints
 	// Parameter is either the endpoints data or an object with an
 	// "error" property containing the error message
@@ -169,29 +164,42 @@ define( function( require ) {
     connection.on('populateFields', function(payload) {
     });
 	
-    // this is essentially DONE
-	connection.on('clickedNext', function() {
-
-	 	preparePayload();
-        connection.trigger('updateActivity',inArgPayload);
-    });
-
+	function getUrlParameter(name) {
+		name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+		var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+		var results = regex.exec(location.search);
+		return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
+	}
 
     function preparePayload() {    
 
 		var value = getMessage();		
 
-        console.log("inArgPayload: " + JSON.stringify(inArgPayload));
 
-		inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
-		inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
+		// inArgPayload['arguments'].execute.inArguments.push({"displayMessage": value});
 
 		console.log('Message: ' + value);
 		
-		inArgPayload.metaData.isConfigured = true;
 	}
 
-	function getMessage () {
-		return $('#messageInput').val().trim();	
+	function save() {
+
+		inArgPayload['arguments'].execute.inArguments = []; // remove all the args, only save the last one
+
+		// push all of the form names / values onto the args stack		
+		$('#genericActivity *').filter(':input').each(function(){
+   			 console.log("ID: " + this.id + " Name: " + this.name + " Value: " + this.value); //your code here
+			 var key;	
+
+			 this.id ? key = this.id : key = this.name; 
+
+			 var formArg = {};
+			 formArg[key] = this.value;
+
+			 inArgPayload['arguments'].execute.inArguments.push(formArg);
+		});				
+
+		connection.trigger('updateActivity',inArgPayload);
+		inArgPayload.metaData.isConfigured = true;		
 	}
 });
