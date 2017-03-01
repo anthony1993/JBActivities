@@ -3,9 +3,11 @@
 
 **NOTE:** Deploy individual branches via multiple Heroku apps.
 
-Important: In the sample edit page configuration /JBActivities/blob/master/public/ixn/activities/generic-activity/sample-config.html you will need to edit the HTML to reflect the context of your Heroku app. 
+**IMPORTANT:** In the sample edit page configuration /JBActivities/blob/master/public/ixn/activities/generic-activity/sample-config.html you will need to edit the HTML to reflect the context of your Heroku app. 
 
 Look for TODO and other comments in that file! 
+
+If you do not update the HTML your edit configuration in Journey Builder will hang!
 
 ### Heroku Config Vars
 
