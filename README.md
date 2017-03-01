@@ -3,6 +3,10 @@
 
 **NOTE:** Deploy individual branches via multiple Heroku apps.
 
+Important: In the sample edit page configuration /JBActivities/blob/master/public/ixn/activities/generic-activity/sample-config.html you will need to edit the HTML to reflect the context of your Heroku app. 
+
+Look for TODO and other comments in that file! 
+
 ### Heroku Config Vars
 
 * ACTIVITY_DESCRIPTION - description of activity
