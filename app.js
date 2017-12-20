@@ -11,7 +11,8 @@ var parseString = require('xml2js').parseString;
 var fs = require('fs');
 
 var configjson  = require('./public/ixn/activities/generic-activity/config.json');
-var numSteps = process.env['CA_NUM_STEPS'] || 1;   
+var numSteps = process.env['CA_NUM_STEPS'] || 1;  
+var numOutcomes = process.env['NUM_OUTCOMES'] || 0; 
 
 // JB wants to be able to hit an index.html page ... just use this text to satisfy that request
 var indexhtml = "Placeholder for JB";
@@ -94,6 +95,7 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     var editWidth = 'EDIT_WIDTH';
     var wizardSteps = 'WIZARD_STEPS';
     var executeEndpointURL = 'EXECUTE_ENDPOINT_URL';
+    var outcomes = 'O_ARGS';
     var endPointSearch = new RegExp('{{'+endpointName+'}}', 'g'); 
     var executeEndPointSearch = new RegExp('{{'+executeEndpointURL+'}}', 'g'); 
     var search = new RegExp('{{'+appName+'}}', 'g');
@@ -113,7 +115,30 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     search = new RegExp('{{'+editHeight+'}}', 'g');
 	json.edit.height = convertNumberToInteger(configjson.edit.height.replace(search,process.env[editHeight]));    
     search = new RegExp('{{'+editWidth+'}}', 'g');	
-	json.edit.width = convertNumberToInteger(configjson.edit.width.replace(search,process.env[editWidth])); 
+    json.edit.width = convertNumberToInteger(configjson.edit.width.replace(search,process.env[editWidth])); 
+    
+    // if we have Outcomes publish here
+    var outcomesArr = [];
+    search = new RegExp('{{'+outcomes+'}}', 'g');
+
+    if (numOutcomes > 0) {
+            
+        for(var i=0; i<numOutcomes; i++) {
+           var args = [];
+           var branchName = getBranchName(i);     
+
+            var outcomeParams = { 
+                arguments : {
+                  branchResult : "" + branchName  + ""
+                }
+            }
+            outcomesArr.push(outcomeParams);
+        }
+        console.log(configjson.outcomes[0].replace(search, JSON.stringify(outcomesArr)));        
+        json.outcomes = JSON.parse(configjson.outcomes[0].replace(search, JSON.stringify(outcomesArr)));
+    } else {
+        json.outcomes = configjson.outcomes[0].replace(search, "");
+    }
 
     // replace the wizard steps
         //     { "label": "First Call", "key": "step1" },
@@ -129,9 +154,15 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
 
     var stepSearch = new RegExp('{{' + wizardSteps + '}}', 'g');    
     json.wizardSteps = JSON.parse(configjson.wizardSteps.replace(stepSearch, JSON.stringify(jsonSteps)));
-        
+   
     res.status(200).send( json );
 });
+
+function getBranchName(branchIndex) {
+    var branchKey = 'BRANCH' + branchIndex;
+    var branchName = process.env[branchName] || branchKey; 
+    return branchName;
+}
 
 function replacer(key, value) {
   return value.replace(/[^\w\s]/gi, '');
