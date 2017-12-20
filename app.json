@@ -59,6 +59,11 @@
 		"CA_NUM_STEPS" : {
 			"description" : "Number of steps needed in your custom activity configuration wizard",
 			"value" : "1"
+		},
+		"NUM_OUTCOMES" : {
+			"description" : "If you want this to be used as a flow control, place a value greater than 0 in this field",
+			"required" : false,
+			"value" : "0"
 		}
 	}
 }
