@@ -160,7 +160,7 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
 
 function getBranchName(branchIndex) {
     var branchKey = 'BRANCH' + branchIndex;
-    var branchName = process.env[branchName] || branchKey; 
+    var branchName = process.env[branchKey] || branchKey; 
     return branchName;
 }
 
