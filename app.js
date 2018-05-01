@@ -13,6 +13,8 @@ var fs = require('fs');
 var configjson  = require('./public/ixn/activities/generic-activity/config.json');
 var numSteps = process.env['CA_NUM_STEPS'] || 1;  
 var numOutcomes = process.env['NUM_OUTCOMES'] || 0; 
+var category = process.env['CATEGORY'] || 'message';
+console.log('Category ' + process.env['CATEGORY']);
 
 // JB wants to be able to hit an index.html page ... just use this text to satisfy that request
 var indexhtml = "Placeholder for JB";
@@ -95,11 +97,14 @@ app.get( '/ixn/activities/generic-activity/config.json', function( req, res ) {
     var editWidth = 'EDIT_WIDTH';
     var wizardSteps = 'WIZARD_STEPS';
     var executeEndpointURL = 'EXECUTE_ENDPOINT_URL';
+    var cat = 'CATEGORY';   
     var outcomes = 'O_ARGS';
     var endPointSearch = new RegExp('{{'+endpointName+'}}', 'g'); 
     var executeEndPointSearch = new RegExp('{{'+executeEndpointURL+'}}', 'g'); 
+    var categorySearch = new RegExp('{{'+cat+'}}', 'g');
     var search = new RegExp('{{'+appName+'}}', 'g');
-	var json = JSON.parse(JSON.stringify(configjson)); //clone it.
+    var json = JSON.parse(JSON.stringify(configjson)); //clone it.
+    json.metaData.category = configjson.metaData.category.replace(categorySearch, category);
 	json.arguments.execute.url = configjson.arguments.execute.url.replace(executeEndPointSearch,process.env[executeEndpointURL]);
 	json.configurationArguments.save.url = configjson.configurationArguments.save.url.replace(endPointSearch,process.env[endpointName]);
 	json.configurationArguments.publish.url = configjson.configurationArguments.publish.url.replace(endPointSearch,process.env[endpointName]);

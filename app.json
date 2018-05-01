@@ -64,6 +64,11 @@
 			"description" : "If you want this to be used as a flow control, place a value greater than 0 in this field",
 			"required" : false,
 			"value" : "0"
+		},
+		"CATEGORY" : {
+			"descrption" : "The type of activty: message, customer, flow are the valid values for this variable",
+			"required" : "true",
+			"value" : "message"
 		}
 	}
 }
