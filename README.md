@@ -25,6 +25,7 @@ If you do not update the HTML your edit configuration in Journey Builder will ha
 * CA_NUM_STEPS - the number of configuration steps your Custom Activity will have
 * NUM_OUTCOMES - if this activity is to be used as a flow control, set a value of greater than 0 here
 * BRANCH[0-x] - if you want to specify names for the branches, add a key of BRANCH0, or BRANCH1 and the value should be what you want displayed in Journey Builder.
+* CATEGOERY - the type of activity being created: customer, flow, message. For backwards compatibaility - if no value is present, message type will be used
 
 The above parameters and their descriptions will be available when you click on the "Deploy" button below.
 
